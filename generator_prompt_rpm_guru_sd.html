@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generator Prompt RPM Guru SD – KKG KAMLA 2026</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Library Export DOCX (docx.js) & Markdown Parser (marked.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <style>
+    :root {
+      --bg-grad: linear-gradient(135deg, #e0f2fe 0%, #fef3c7 48%, #dcfce7 100%);
+      --header-grad: linear-gradient(135deg, #0b2240 0%, #153e75 55%, #0d6e58 100%);
+      --card-bg: rgba(255, 255, 255, 0.90);
+      --accent-primary: #0f294a;
+    }
+    body[data-theme="laut"] {
+      --bg-grad: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 50%, #ccfbf1 100%);
+      --header-grad: linear-gradient(135deg, #0c4a6e 0%, #0369a1 55%, #0f766e 100%);
+    }
+    body[data-theme="hangat"] {
+      --bg-grad: linear-gradient(135deg, #fef3c7 0%, #ffedd5 50%, #fce7f3 100%);
+      --header-grad: linear-gradient(135deg, #78350f 0%, #b45309 55%, #9f1239 100%);
+    }
+    body[data-theme="hutan"] {
+      --bg-grad: linear-gradient(135deg, #dcfce7 0%, #ecfdf5 50%, #fef9c3 100%);
+      --header-grad: linear-gradient(135deg, #064e3b 0%, #047857 55%, #1e40af 100%);
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-grad);
+      background-attachment: fixed;
+      color: #1e293b;
+      transition: background 0.4s ease;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(15, 41, 74, 0.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    h1, h2, h3, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .header-pattern {
+      background: var(--header-grad);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease;
+    }
+    .header-pattern::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 25%, rgba(251, 191, 36, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(52, 211, 153, 0.20) 0%, transparent 45%),
+        radial-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 18px 18px;
+      pointer-events: none;
+    }
+    .card-box {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 1.15rem;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 10px 28px -6px rgba(15, 41, 74, 0.10);
+    }
+    .section-tint-blue {
+      background: linear-gradient(180deg, rgba(239, 246, 255, 0.94) 0%, rgba(255, 255, 255, 0.92) 100%);
+      border-top: 4px solid #1d4ed8;
+    }
+    .section-tint-emerald {
+      background: linear-gradient(180deg, rgba(236, 253, 245, 0.94) 0%, rgba(255, 255, 255, 0.92) 100%);
+      border-top: 4px solid #059669;
+    }
+    .section-tint-amber {
+      background: linear-gradient(180deg, rgba(255, 251, 235, 0.94) 0%, rgba(255, 255, 255, 0.92) 100%);
+      border-top: 4px solid #d97706;
+    }
+    .section-tint-indigo {
+      background: linear-gradient(180deg, rgba(238, 242, 255, 0.94) 0%, rgba(255, 255, 255, 0.92) 100%);
+      border-top: 4px solid #4f46e5;
+    }
+    .input-field {
+      width: 100%;
+      border-radius: 0.7rem;
+      border: 1px solid #cbd5e1;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      background-color: rgba(255, 255, 255, 0.92);
+    }
+    .input-field:focus {
+      outline: none;
+      border-color: #1d4ed8;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.16);
+    }
+    .chip-check input:checked + span {
+      background: linear-gradient(135deg, #0f294a 0%, #1d4ed8 100%);
+      color: #ffffff;
+      border-color: #0f294a;
+      box-shadow: 0 4px 10px rgba(29, 78, 216, 0.25);
+    }
+    .chip-gold input:checked + span {
+      background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+      color: #ffffff;
+      border-color: #b45309;
+      box-shadow: 0 4px 10px rgba(217, 119, 6, 0.25);
+    }
+    .prompt-output {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+    .btn-hover {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-hover:hover {
+      transform: translateY(-1px);
+    }
+    .btn-hover:active {
+      transform: translateY(0);
+    }
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 999px;
+    }
+
+    /* Styling Kertas Dokumen Resmi RPM (Pratinjau & Cetak PDF) */
+    .rpm-paper {
+      font-family: 'Times New Roman', Times, serif;
+      color: #0f172a;
+      background: #ffffff;
+      line-height: 1.5;
+      font-size: 13.5px;
+    }
+    .rpm-paper h1, .rpm-paper h2, .rpm-paper h3 {
+      font-family: 'Times New Roman', Times, serif;
+      color: #0b2240;
+    }
+    .rpm-paper h1 {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+    .rpm-paper h2 {
+      font-size: 14.5px;
+      font-weight: 700;
+      background: #eff6ff;
+      border-left: 4px solid #1d4ed8;
+      padding: 4px 8px;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+    .rpm-paper h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    .rpm-paper p {
+      margin-bottom: 6px;
+      text-align: justify;
+    }
+    .rpm-paper ul, .rpm-paper ol {
+      margin-left: 20px;
+      margin-bottom: 8px;
+    }
+    .rpm-paper ul { list-style-type: disc; }
+    .rpm-paper ol { list-style-type: decimal; }
+    .rpm-paper li { margin-bottom: 3px; }
+    .rpm-paper table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 12.5px;
+    }
+    .rpm-paper th, .rpm-paper td {
+      border: 1px solid #1e293b;
+      padding: 6px 8px;
+      vertical-align: top;
+      text-align: left;
+    }
+    .rpm-paper th {
+      background-color: #e2e8f0;
+      font-weight: 700;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printableRpmArea, #printableRpmArea * {
+        visibility: visible;
+      }
+      #printableRpmArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none !important;
+        border: none !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 1.5cm;
+      }
+    }
+  </style>
+</head>
+<body data-theme="nusantara" class="min-h-screen flex flex-col antialiased selection:bg-amber-200 selection:text-slate-900">
+  <!-- HEADER UTAMA -->
+  <header class="header-pattern text-white shadow-lg border-b border-white/15 sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 text-slate-950 flex items-center justify-center shadow-lg ring-2 ring-white/30 shrink-0">
+          <i class="fa-solid fa-book-open-reader text-xl"></i>
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-0.5">
+            <span class="px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-200 border border-amber-300/30 text-[10px] font-bold uppercase tracking-wider">
+              KKG Kampung Laut 2026
+            </span>
+            <span class="text-[11px] text-sky-200 font-medium hidden sm:inline">Deep Learning SD (Fase A, B, C)</span>
+          </div>
+          <h1 class="font-heading font-extrabold text-lg sm:text-2xl tracking-tight text-white leading-tight">
+            Generator Prompt RPM Guru SD
+          </h1>
+          <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-1 text-xs">
+            <span class="font-semibold text-amber-300">KKG Kampung Laut 2026</span>
+            <span class="text-white/25">&bull;</span>
+            <span class="text-white/35 font-normal select-none">Wahyono, S.Pd.SD</span>
+          </div>
+          <p class="text-[11px] text-sky-100/80 mt-0.5">
+            Susun Prompt Rencana Pembelajaran Mendalam (RPM) Siap Tempel ke Gemini AI
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2 self-start sm:self-center">
+        <!-- Pemilih Nuansa Tema Warna -->
+        <div class="flex items-center gap-1.5 bg-black/25 px-2.5 py-1.5 rounded-xl border border-white/15" title="Ganti Nuansa Warna">
+          <span class="text-[10px] text-amber-200 font-semibold hidden md:inline mr-0.5">Tema:</span>
+          <button type="button" onclick="setAppTheme('nusantara')" class="w-5 h-5 rounded-full bg-gradient-to-br from-sky-300 via-amber-300 to-emerald-400 border-2 border-white shadow-sm hover:scale-110 transition" title="Tema Nusantara Ceria"></button>
+          <button type="button" onclick="setAppTheme('laut')" class="w-5 h-5 rounded-full bg-gradient-to-br from-blue-400 to-teal-400 border-2 border-white/80 shadow-sm hover:scale-110 transition" title="Tema Biru Pesisir"></button>
+          <button type="button" onclick="setAppTheme('hangat')" class="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-rose-400 border-2 border-white/80 shadow-sm hover:scale-110 transition" title="Tema Senja Hangat"></button>
+          <button type="button" onclick="setAppTheme('hutan')" class="w-5 h-5 rounded-full bg-gradient-to-br from-emerald-400 to-lime-300 border-2 border-white/80 shadow-sm hover:scale-110 transition" title="Tema Hijau Segar"></button>
+        </div>
+
+        <button type="button" onclick="fillSampleData()" class="btn-hover px-3.5 py-2 rounded-xl bg-amber-400/25 hover:bg-amber-400/35 text-amber-100 text-xs font-semibold border border-amber-300/40 flex items-center gap-1.5">
+          <i class="fa-solid fa-bolt text-amber-300"></i>
+          Isi Contoh Cepat
+        </button>
+        <button type="button" onclick="resetForm()" class="btn-hover px-3.5 py-2 rounded-xl bg-rose-500/25 hover:bg-rose-500/40 text-rose-100 text-xs font-semibold border border-rose-300/35 flex items-center gap-1.5">
+          <i class="fa-solid fa-rotate-left"></i>
+          Reset
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- KOLOM KIRI: FORMULIR PENGATURAN RPM -->
+    <div class="lg:col-span-7 space-y-5">
+
+      <!-- 1. IDENTITAS PEMBELAJARAN -->
+      <section class="card-box section-tint-blue p-5">
+        <div class="flex items-center justify-between border-b border-blue-100 pb-3 mb-4">
+          <div class="flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-blue-700 text-white text-xs font-bold flex items-center justify-center shadow-sm">1</span>
+            <h2 class="font-heading font-bold text-slate-800 text-base">Identitas Pembelajaran</h2>
+          </div>
+          <span id="badgeFase" class="text-xs font-bold px-3 py-1 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
+            Fase C (Kelas 5)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Guru</label>
+            <input type="text" id="namaGuru" class="input-field" placeholder="Contoh: Wahyono, S.Pd.SD." />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">NIP (Opsional)</label>
+            <input type="text" id="nipGuru" class="input-field" placeholder="Kosongkan jika tidak perlu" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Sekolah</label>
+            <input type="text" id="namaSekolah" class="input-field" placeholder="Contoh: SD Negeri Kampung Laut" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Tahun Ajaran</label>
+            <input type="text" id="tahunAjaran" class="input-field" value="2026/2027" />
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 sm:col-span-2">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Kelas <span class="text-rose-500">*</span></label>
+              <select id="kelas" onchange="updateFaseOtomatis()" class="input-field font-semibold text-slate-900">
+                <option value="1">Kelas 1</option>
+                <option value="2">Kelas 2</option>
+                <option value="3">Kelas 3</option>
+                <option value="4">Kelas 4</option>
+                <option value="5" selected>Kelas 5</option>
+                <option value="6">Kelas 6</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Fase (Otomatis)</label>
+              <input type="text" id="fase" class="input-field bg-slate-50 font-bold text-blue-900" value="Fase C" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Semester</label>
+              <select id="semester" class="input-field">
+                <option value="1 (Ganjil)">1 (Ganjil)</option>
+                <option value="2 (Genap)">2 (Genap)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Mata Pelajaran <span class="text-rose-500">*</span></label>
+            <select id="mapel" onchange="toggleMapelLain()" class="input-field font-medium">
+              <option value="IPAS (Ilmu Pengetahuan Alam dan Sosial)">IPAS</option>
+              <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+              <option value="Matematika">Matematika</option>
+              <option value="Pendidikan Pancasila">Pendidikan Pancasila</option>
+              <option value="Pendidikan Agama dan Budi Pekerti">Pendidikan Agama & Budi Pekerti</option>
+              <option value="PJOK">PJOK</option>
+              <option value="Seni Rupa / Seni Budaya">Seni Rupa / Seni Budaya</option>
+              <option value="Bahasa Inggris">Bahasa Inggris</option>
+              <option value="Muatan Lokal / Bahasa Daerah">Muatan Lokal / Bahasa Daerah</option>
+              <option value="Lainnya">Lainnya (Tulis Sendiri)</option>
+            </select>
+            <input type="text" id="mapelLain" class="input-field mt-2 hidden" placeholder="Tuliskan nama mata pelajaran..." />
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Alokasi Waktu</label>
+              <input type="text" id="alokasiWaktu" class="input-field" value="2 x 35 menit (70 menit)" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Pertemuan</label>
+              <select id="jumlahPertemuan" class="input-field">
+                <option value="1 Pertemuan">1 Pertemuan</option>
+                <option value="2 Pertemuan">2 Pertemuan</option>
+                <option value="3 Pertemuan">3 Pertemuan</option>
+                <option value="4 Pertemuan">4 Pertemuan</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Materi / Topik Pembelajaran <span class="text-rose-500">*</span></label>
+            <input type="text" id="materiTopik" class="input-field font-medium" placeholder="Contoh: Jaring-Jaring Makanan dan Keseimbangan Ekosistem" />
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Submateri / Fokus Pembahasan (Opsional)</label>
+            <input type="text" id="subMateri" class="input-field" placeholder="Contoh: Peran produsen, konsumen, pengurai, dan dampak kepunahan salah satu komponen" />
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. CP, TP & KONTEKS KELAS -->
+      <section class="card-box section-tint-emerald p-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-100 pb-3 mb-4">
+          <div class="flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shadow-sm">2</span>
+            <h2 class="font-heading font-bold text-slate-800 text-base">CP, Tujuan Pembelajaran & Karakteristik Siswa</h2>
+          </div>
+          <span class="text-[11px] font-semibold text-emerald-800 bg-emerald-100/80 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+            Pilih Otomatis atau Manual
+          </span>
+        </div>
+
+        <div class="space-y-4">
+          <!-- CAPAIAN PEMBELAJARAN (CP) -->
+          <div class="p-3.5 rounded-xl bg-white/80 border border-emerald-200/80">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <label class="text-xs font-bold text-slate-700">Capaian Pembelajaran (CP)</label>
+              <div class="inline-flex rounded-lg bg-slate-100 p-0.5 border border-slate-200">
+                <button type="button" id="btnCpAuto" onclick="setModeCP('auto')" class="px-3 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white shadow-sm transition">
+                  <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Otomatis
+                </button>
+                <button type="button" id="btnCpManual" onclick="setModeCP('manual')" class="px-3 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition">
+                  <i class="fa-solid fa-pen mr-1"></i> Manual
+                </button>
+              </div>
+            </div>
+            <div id="cpAutoInfo" class="text-xs text-emerald-800 bg-emerald-50/90 border border-emerald-200 rounded-lg px-3 py-2 flex items-center gap-2">
+              <i class="fa-solid fa-robot text-emerald-600"></i>
+              <span>Sistem/AI akan menyusun CP secara otomatis sesuai Fase, Mata Pelajaran, dan Materi yang dipilih.</span>
+            </div>
+            <div id="cpManualBox" class="hidden mt-1">
+              <textarea id="cpInput" rows="3" class="input-field" placeholder="Tuliskan atau tempelkan redaksi Capaian Pembelajaran (CP) di sini..."></textarea>
+            </div>
+          </div>
+
+          <!-- TUJUAN PEMBELAJARAN (TP) -->
+          <div class="p-3.5 rounded-xl bg-white/80 border border-emerald-200/80">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <label class="text-xs font-bold text-slate-700">Tujuan Pembelajaran (TP)</label>
+              <div class="inline-flex rounded-lg bg-slate-100 p-0.5 border border-slate-200">
+                <button type="button" id="btnTpAuto" onclick="setModeTP('auto')" class="px-3 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white shadow-sm transition">
+                  <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Otomatis
+                </button>
+                <button type="button" id="btnTpManual" onclick="setModeTP('manual')" class="px-3 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition">
+                  <i class="fa-solid fa-pen mr-1"></i> Manual
+                </button>
+              </div>
+            </div>
+            <div id="tpAutoInfo" class="text-xs text-emerald-800 bg-emerald-50/90 border border-emerald-200 rounded-lg px-3 py-2 flex items-center gap-2">
+              <i class="fa-solid fa-robot text-emerald-600"></i>
+              <span>Sistem/AI akan merumuskan Tujuan Pembelajaran (TP) yang spesifik dan terukur sesuai Kelas dan Materi.</span>
+            </div>
+            <div id="tpManualBox" class="hidden mt-1">
+              <textarea id="tpInput" rows="3" class="input-field" placeholder="Tuliskan Tujuan Pembelajaran (TP) Anda di sini..."></textarea>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Kompetensi Awal Siswa (Opsional)</label>
+              <input type="text" id="kompetensiAwal" class="input-field" placeholder="Contoh: Sudah mengenal hewan herbivora & karnivora" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-1">Karakteristik / Konteks Lingkungan Siswa</label>
+              <input type="text" id="karakteristikSiswa" class="input-field" placeholder="Contoh: Siswa wilayah pesisir/desa, suka belajar visual & praktik" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. KERANGKA PEMBELAJARAN MENDALAM (DEEP LEARNING) -->
+      <section class="card-box section-tint-amber p-5">
+        <div class="flex items-center gap-2.5 border-b border-amber-100 pb-3 mb-4">
+          <span class="w-7 h-7 rounded-lg bg-amber-600 text-white text-xs font-bold flex items-center justify-center shadow-sm">3</span>
+          <h2 class="font-heading font-bold text-slate-800 text-base">Kerangka & Prinsip Pembelajaran Mendalam</h2>
+        </div>
+
+        <!-- 8 Dimensi Profil Lulusan -->
+        <div class="mb-4">
+          <label class="block text-xs font-bold text-slate-700 mb-2">Dimensi Profil Lulusan (8 Dimensi – Pilih yang relevan)</label>
+          <div class="flex flex-wrap gap-2" id="dimensiContainer">
+            <label class="chip-check cursor-pointer">
+              <input type="checkbox" value="Keimanan dan Ketakwaan terhadap Tuhan YME" class="hidden" checked />
+              <span class="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 transition">Keimanan & Ketakwaan</span>
+            </label>
+            <label class="chip-check cursor-pointer">
+              <input type="checkbox" value="Kewargaan" class="hidden" />
+              <span class="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 transition">Kewargaan</span>
+            </label>
+            <label class="chip-check cursor-pointer">
+              <input type="checkbox" value="Penalaran Kritis" class="hidden" checked />
+              <span class="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 transition">Penalaran Kritis</span>
+            </label>
+            <label class="chip-check cursor-pointer">
+              <input type="checkbox" value="Kreativitas" class="hidden" checked />
+              <span class="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 transition">Kreativitas</span>
+            </label>
+            <label class="chip-check cursor-pointer">
+              <input type="checkbox" value="Kolaborasi" class="hidden" checked />
+              <span class="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 transition">Kolaborasi</span>
+            </label>
+            <label class="chip-check cursor-pointer">
+              <input type="checkbox" value="Kemandirian" class="hidden" />
+              <span class="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 transition">Kemandirian</span>
+            </label>
+            <label class="chip-check cursor-pointer">
+              <input type="checkbox" value="Kesehatan" class="hidden" />
+              <span class="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 transition">Kesehatan</span>
+            </label>
+            <label class="chip-check cursor-pointer">
+              <input type="checkbox" value="Komunikasi" class="hidden" checked />
+              <span class="inline-block text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 text-slate-700 transition">Komunikasi</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 3 Prinsip Pembelajaran Mendalam -->
+        <div class="mb-4">
+          <label class="block text-xs font-bold text-slate-700 mb-2">Prinsip Pembelajaran Mendalam</label>
+          <div class="flex flex-wrap gap-2" id="prinsipContainer">
+            <label class="chip-gold cursor-pointer">
+              <input type="checkbox" value="Berkesadaran (Mindful)" class="hidden" checked />
+              <span class="inline-block text-xs font-semibold px-3.5 py-1.5 rounded-full border border-amber-300 bg-amber-50/60 text-amber-900 transition">Berkesadaran (Mindful)</span>
+            </label>
+            <label class="chip-gold cursor-pointer">
+              <input type="checkbox" value="Bermakna (Meaningful)" class="hidden" checked />
+              <span class="inline-block text-xs font-semibold px-3.5 py-1.5 rounded-full border border-amber-300 bg-amber-50/60 text-amber-900 transition">Bermakna (Meaningful)</span>
+            </label>
+            <label class="chip-gold cursor-pointer">
+              <input type="checkbox" value="Menggembirakan (Joyful)" class="hidden" checked />
+              <span class="inline-block text-xs font-semibold px-3.5 py-1.5 rounded-full border border-amber-300 bg-amber-50/60 text-amber-900 transition">Menggembirakan (Joyful)</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Praktik Pedagogis, Kemitraan, Lingkungan, Digital -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Model Pembelajaran (Praktik Pedagogis)</label>
+            <select id="modelPembelajaran" class="input-field font-medium">
+              <option value="Problem Based Learning (PBL)">Problem Based Learning (PBL)</option>
+              <option value="Project Based Learning (PjBL)">Project Based Learning (PjBL)</option>
+              <option value="Discovery Learning">Discovery Learning</option>
+              <option value="Inquiry Learning">Inquiry Learning</option>
+              <option value="Cooperative Learning">Cooperative Learning</option>
+              <option value="Pembelajaran Kontekstual (CTL)">Pembelajaran Kontekstual (CTL)</option>
+              <option value="Pembelajaran Langsung (Direct Instruction)">Pembelajaran Langsung (Direct Instruction)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Metode Pembelajaran</label>
+            <input type="text" id="metodePembelajaran" class="input-field" value="Diskusi kelompok, tanya jawab, pengamatan, penugasan, dan presentasi" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Kemitraan Pembelajaran</label>
+            <input type="text" id="kemitraan" class="input-field" value="Guru, teman sebaya (kelompok), dan orang tua di rumah" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-1">Lingkungan & Pemanfaatan Digital</label>
+            <input type="text" id="lingkunganDigital" class="input-field" value="Ruang kelas, lingkungan alam sekitar sekolah, serta video/gambar edukasi" />
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. KELENGKAPAN DOKUMEN YANG DIMINTA KE GEMINI -->
+      <section class="card-box section-tint-indigo p-5">
+        <div class="flex items-center gap-2.5 border-b border-indigo-100 pb-3 mb-4">
+          <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shadow-sm">4</span>
+          <h2 class="font-heading font-bold text-slate-800 text-base">Komponen Output RPM yang Diminta ke Gemini</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+          <label class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-indigo-100 hover:bg-indigo-50/70 cursor-pointer transition">
+            <input type="checkbox" class="komponen-cb w-4 h-4 accent-indigo-700 shrink-0" value="Rincian Alokasi Waktu per Tahap (Awal, Inti: Memahami-Mengaplikasi-Merefleksi, dan Penutup) yang pas dengan total JP" checked />
+            <span class="font-medium text-slate-700">Alokasi Waktu Runtut (Awal, Inti, Penutup)</span>
+          </label>
+          <label class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-indigo-100 hover:bg-indigo-50/70 cursor-pointer transition">
+            <input type="checkbox" class="komponen-cb w-4 h-4 accent-indigo-700 shrink-0" value="Asesmen Lengkap (Diagnostik Awal, Formatif Proses, dan Sumatif Akhir) beserta instrumen soal & kunci jawaban" checked />
+            <span class="font-medium text-slate-700">Asesmen Awal, Proses, Akhir + Soal</span>
+          </label>
+          <label class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-indigo-100 hover:bg-indigo-50/70 cursor-pointer transition">
+            <input type="checkbox" class="komponen-cb w-4 h-4 accent-indigo-700 shrink-0" value="Tabel Rubrik Penilaian 4 Skala (Sangat Baik, Baik, Cukup, Perlu Bimbingan) & KKTP" checked />
+            <span class="font-medium text-slate-700">Tabel Rubrik Penilaian 4 Skala & KKTP</span>
+          </label>
+          <label class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-indigo-100 hover:bg-indigo-50/70 cursor-pointer transition">
+            <input type="checkbox" class="komponen-cb w-4 h-4 accent-indigo-700 shrink-0" value="Lembar Kerja Peserta Didik (LKPD) siap pakai yang sesuai tingkat kelas SD" checked />
+            <span class="font-medium text-slate-700">Draf LKPD Siap Cetak untuk Siswa</span>
+          </label>
+          <label class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-indigo-100 hover:bg-indigo-50/70 cursor-pointer transition">
+            <input type="checkbox" class="komponen-cb w-4 h-4 accent-indigo-700 shrink-0" value="Strategi Pembelajaran Berdiferensiasi (Konten, Proses, Produk) serta Program Pengayaan dan Remedial" checked />
+            <span class="font-medium text-slate-700">Diferensiasi, Pengayaan & Remedial</span>
+          </label>
+          <label class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-indigo-100 hover:bg-indigo-50/70 cursor-pointer transition">
+            <input type="checkbox" class="komponen-cb w-4 h-4 accent-indigo-700 shrink-0" value="Pertanyaan Refleksi Guru dan Refleksi Peserta Didik serta Kolom Tanda Tangan Kepala Sekolah & Guru" checked />
+            <span class="font-medium text-slate-700">Refleksi Guru/Siswa & Kolom Pengesahan</span>
+          </label>
+        </div>
+
+        <div class="mt-3.5">
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Catatan / Permintaan Khusus Tambahan (Opsional)</label>
+          <input type="text" id="catatanTambahan" class="input-field" placeholder="Contoh: Sertakan ice breaking singkat di kegiatan awal, gunakan bahasa ramah anak SD..." />
+        </div>
+
+        <div class="mt-5">
+          <button type="button" id="btnGenerateUtama" onclick="generatePromptDanRpmOtomatis()" class="btn-hover w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-[#0f294a] via-[#174278] to-[#0d7a5f] hover:opacity-95 text-white font-heading font-bold text-sm sm:text-base shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2.5">
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
+            GENERATE RPM & SIAPKAN DOCX / PDF
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- KOLOM KANAN: HASIL RPM LANGSUNG & PROMPT -->
+    <div class="lg:col-span-5 space-y-5">
+      <div class="card-box bg-gradient-to-b from-slate-900 via-[#0f294a] to-[#0b3b3c] text-white border border-slate-700/80 p-5 lg:sticky lg:top-24 shadow-xl">
+        <!-- Tab Switcher: Dokumen Hasil Gemini Langsung vs Prompt Mentah -->
+        <div class="flex items-center gap-1.5 bg-black/30 p-1 rounded-xl border border-white/10 mb-3.5">
+          <button type="button" id="tabBtnExport" onclick="switchRightTab('export')" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 shadow transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-file-word"></i> 1. Hasil RPM (DOCX/PDF)
+          </button>
+          <button type="button" id="tabBtnPrompt" onclick="switchRightTab('prompt')" class="flex-1 py-2 px-3 rounded-lg text-xs font-semibold text-sky-200 hover:text-white transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-terminal text-amber-300"></i> 2. Teks Prompt
+          </button>
+        </div>
+
+        <!-- PANEL 1: HASIL RPM LANGSUNG DARI GEMINI (SIAP UNDUH DOCX & PDF) -->
+        <div id="rightPanelExport" class="space-y-3">
+          <div class="flex items-center justify-between border-b border-white/15 pb-2.5">
+            <div>
+              <h2 class="font-heading font-bold text-emerald-300 text-base flex items-center gap-2">
+                <i class="fa-solid fa-robot text-amber-300"></i>
+                Dokumen RPM Otomatis Gemini
+              </h2>
+              <p id="aiStatusSubtitle" class="text-[11px] text-sky-200/85">Klik tombol Generate di kiri, hasil otomatis muncul & siap unduh!</p>
+            </div>
+            <span id="statusBadge" class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-white/15 text-amber-200 border border-white/15 shrink-0">
+              Siap Generate
+            </span>
+          </div>
+
+          <!-- Indikator Loading Proses AI -->
+          <div id="aiLoadingBox" class="hidden rounded-xl bg-sky-950/90 border border-sky-400/40 p-4 text-center space-y-2">
+            <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-amber-400/20 text-amber-300">
+              <i class="fa-solid fa-spinner fa-spin text-xl"></i>
+            </div>
+            <p class="text-xs font-bold text-amber-200">Gemini sedang menyusun dokumen RPM lengkap...</p>
+            <p class="text-[11px] text-sky-200/80">Menyusun identitas, CP/TP, langkah pembelajaran mendalam, LKPD, asesmen, dan rubrik penilaian.</p>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <label class="text-[11px] font-semibold text-sky-200">Isi Dokumen RPM (Otomatis dari Gemini / Dapat Diedit):</label>
+              <button type="button" onclick="bukaModalPratinjau()" class="text-[11px] font-bold text-amber-300 hover:underline">
+                <i class="fa-solid fa-expand mr-1"></i> Pratinjau Kertas A4
+              </button>
+            </div>
+            <textarea id="rpmMarkdownInput" rows="12" oninput="updatePratinjauDokumen()" class="w-full rounded-xl bg-slate-950/90 text-slate-100 p-3.5 text-xs leading-relaxed border border-emerald-400/35 focus:border-amber-400 focus:outline-none shadow-inner" placeholder="Isi formulir di sebelah kiri lalu klik 'GENERATE RPM & SIAPKAN DOCX / PDF'.&#10;&#10;Gemini AI akan langsung menuliskan dokumen RPM lengkap di kotak ini sehingga Anda bisa langsung mengunduh file Word (.DOCX) atau PDF tanpa perlu salin-tempel!"></textarea>
+          </div>
+
+          <!-- TOMBOL UNDUH DOCX & PDF LANGSUNG -->
+          <div class="grid grid-cols-2 gap-2.5 pt-1">
+            <button type="button" onclick="unduhFileDocx()" class="btn-hover py-3 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-heading font-bold text-xs flex items-center justify-center gap-2 shadow-lg border border-blue-400/30">
+              <i class="fa-solid fa-file-word text-base"></i>
+              Unduh Word (.DOCX)
+            </button>
+            <button type="button" onclick="cetakAtauSimpanPdf()" class="btn-hover py-3 px-3 rounded-xl bg-gradient-to-r from-rose-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white font-heading font-bold text-xs flex items-center justify-center gap-2 shadow-lg border border-rose-400/30">
+              <i class="fa-solid fa-file-pdf text-base"></i>
+              Simpan / Cetak PDF
+            </button>
+          </div>
+
+          <button type="button" onclick="bukaModalPratinjau()" class="btn-hover w-full py-2 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-sky-100 font-semibold text-xs flex items-center justify-center gap-1.5 border border-white/15">
+            <i class="fa-solid fa-eye text-amber-300"></i>
+            Lihat & Edit Pratinjau Kertas A4 Siap Cetak
+          </button>
+        </div>
+
+        <!-- PANEL 2: PROMPT GEMINI -->
+        <div id="rightPanelPrompt" class="hidden">
+          <div class="flex items-center justify-between border-b border-white/15 pb-3 mb-3">
+            <div>
+              <h2 class="font-heading font-bold text-amber-300 text-base flex items-center gap-2">
+                <i class="fa-solid fa-terminal text-emerald-400"></i>
+                Prompt RPM Terstruktur
+              </h2>
+              <p class="text-xs text-sky-200/85">Prompt otomatis yang dikirimkan ke Gemini AI</p>
+            </div>
+          </div>
+
+          <!-- KOTAK HASIL PROMPT -->
+          <div class="relative">
+            <textarea id="hasilPrompt" rows="13" readonly class="prompt-output w-full rounded-xl bg-slate-950/90 text-emerald-50 p-4 text-xs sm:text-[13px] border border-sky-400/30 focus:outline-none shadow-inner" placeholder="Prompt terstruktur akan tampil di sini setelah Anda menekan tombol Generate..."></textarea>
+          </div>
+
+          <!-- TOMBOL AKSI PROMPT -->
+          <div class="grid grid-cols-2 gap-2 mt-3.5">
+            <button type="button" onclick="salinPrompt()" class="btn-hover py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow-md">
+              <i class="fa-regular fa-copy"></i>
+              Salin Prompt
+            </button>
+            <button type="button" onclick="unduhTxt()" class="btn-hover py-2.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-semibold text-xs flex items-center justify-center gap-1.5 border border-white/20">
+              <i class="fa-solid fa-file-arrow-down text-sky-300"></i>
+              Unduh .TXT
+            </button>
+          </div>
+        </div>
+
+        <!-- RIWAYAT PROMPT & RPM -->
+        <div class="mt-4 pt-3.5 border-t border-white/15">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-sky-200">Riwayat Prompt Tersimpan</h3>
+            <button type="button" onclick="hapusSemuaRiwayat()" class="text-[11px] text-rose-300 hover:text-rose-200 hover:underline font-medium">
+              Hapus Semua
+            </button>
+          </div>
+          <div id="riwayatList" class="space-y-2 max-h-40 overflow-y-auto pr-1">
+            <p class="text-xs text-slate-400 italic">Belum ada riwayat prompt RPM.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL PRATINJAU KERTAS A4 & CETAK PDF / DOCX -->
+  <div id="previewDocModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/75 backdrop-blur-sm p-3 sm:p-5">
+    <div class="bg-slate-100 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-300 overflow-hidden">
+      <!-- Header Modal Pratinjau -->
+      <div class="bg-[#0f294a] text-white px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-file-lines text-amber-300 text-lg"></i>
+          <div>
+            <h3 class="font-heading font-bold text-sm sm:text-base">Pratinjau Dokumen Resmi RPM (Kertas A4)</h3>
+            <p class="text-[11px] text-sky-200">Anda dapat mengklik langsung teks di kertas untuk mengedit sebelum mengunduh</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" onclick="unduhFileDocx()" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-file-word"></i> Unduh .DOCX
+          </button>
+          <button type="button" onclick="cetakAtauSimpanPdf()" class="px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-print"></i> Cetak / PDF
+          </button>
+          <button type="button" onclick="tutupModalPratinjau()" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Area Kertas A4 yang Bisa Diedit & Dicetak -->
+      <div class="p-4 sm:p-8 overflow-y-auto flex-1 bg-slate-200/80">
+        <div id="printableRpmArea" contenteditable="true" class="rpm-paper max-w-[21cm] mx-auto p-6 sm:p-10 shadow-xl border border-slate-300 rounded-sm focus:outline-none">
+          <!-- Konten dirender otomatis via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast & Modal Konfirmasi -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl border border-white/15 flex items-center gap-2.5 text-xs font-semibold pointer-events-none">
+    <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toastMsg">Berhasil!</span>
+  </div>
+
+  <div id="customModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/70 backdrop-blur-xs p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 shadow-2xl border border-slate-200">
+      <h3 id="modalTitle" class="font-heading font-bold text-slate-900 text-base">Konfirmasi</h3>
+      <p id="modalMessage" class="text-xs text-slate-600 mt-1.5 leading-relaxed"></p>
+      <div class="mt-5 flex justify-end gap-2">
+        <button type="button" id="modalCancel" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100">Batal</button>
+        <button type="button" id="modalConfirm" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white">Ya, Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'kkg_kamla_prompt_rpm_history_v1';
+    const DRAFT_KEY = 'kkg_kamla_prompt_rpm_draft_v1';
+    const THEME_KEY = 'kkg_kamla_rpm_theme_v1';
+
+    let cpMode = 'auto';
+    let tpMode = 'auto';
+
+    function setModeCP(mode, save = true) {
+      cpMode = mode;
+      const btnAuto = document.getElementById('btnCpAuto');
+      const btnManual = document.getElementById('btnCpManual');
+      const autoInfo = document.getElementById('cpAutoInfo');
+      const manualBox = document.getElementById('cpManualBox');
+
+      if (mode === 'manual') {
+        btnManual.className = 'px-3 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white shadow-sm transition';
+        btnAuto.className = 'px-3 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition';
+        autoInfo.classList.add('hidden');
+        manualBox.classList.remove('hidden');
+        if (save) document.getElementById('cpInput').focus();
+      } else {
+        btnAuto.className = 'px-3 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white shadow-sm transition';
+        btnManual.className = 'px-3 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition';
+        autoInfo.classList.remove('hidden');
+        manualBox.classList.add('hidden');
+      }
+      if (save) simpanDraft();
+    }
+
+    function setModeTP(mode, save = true) {
+      tpMode = mode;
+      const btnAuto = document.getElementById('btnTpAuto');
+      const btnManual = document.getElementById('btnTpManual');
+      const autoInfo = document.getElementById('tpAutoInfo');
+      const manualBox = document.getElementById('tpManualBox');
+
+      if (mode === 'manual') {
+        btnManual.className = 'px-3 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white shadow-sm transition';
+        btnAuto.className = 'px-3 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition';
+        autoInfo.classList.add('hidden');
+        manualBox.classList.remove('hidden');
+        if (save) document.getElementById('tpInput').focus();
+      } else {
+        btnAuto.className = 'px-3 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white shadow-sm transition';
+        btnManual.className = 'px-3 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-slate-900 transition';
+        autoInfo.classList.remove('hidden');
+        manualBox.classList.add('hidden');
+      }
+      if (save) simpanDraft();
+    }
+
+    function setAppTheme(themeName) {
+      document.body.setAttribute('data-theme', themeName);
+      localStorage.setItem(THEME_KEY, themeName);
+      const labelMap = {
+        nusantara: 'Nusantara Ceria',
+        laut: 'Biru Pesisir',
+        hangat: 'Senja Hangat',
+        hutan: 'Hijau Segar'
+      };
+      showToast(`Nuansa tema diubah ke ${labelMap[themeName] || themeName}`);
+    }
+
+    function showToast(msg, type = 'success') {
+      const toast = document.getElementById('toast');
+      const icon = document.getElementById('toastIcon');
+      const msgEl = document.getElementById('toastMsg');
+      msgEl.textContent = msg;
+      icon.className = type === 'error'
+        ? 'fa-solid fa-circle-exclamation text-rose-400'
+        : 'fa-solid fa-circle-check text-emerald-400';
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2800);
+    }
+
+    function showConfirmDialog(title, message, onConfirm) {
+      const modal = document.getElementById('customModal');
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalMessage').textContent = message;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      const close = () => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      };
+
+      document.getElementById('modalCancel').onclick = close;
+      document.getElementById('modalConfirm').onclick = () => {
+        close();
+        onConfirm();
+      };
+    }
+
+    function updateFaseOtomatis() {
+      const kelas = parseInt(document.getElementById('kelas').value, 10);
+      let fase = 'Fase C';
+      if (kelas === 1 || kelas === 2) fase = 'Fase A';
+      else if (kelas === 3 || kelas === 4) fase = 'Fase B';
+
+      document.getElementById('fase').value = fase;
+      document.getElementById('badgeFase').textContent = `${fase} (Kelas ${kelas})`;
+      simpanDraft();
+    }
+
+    function toggleMapelLain() {
+      const mapel = document.getElementById('mapel').value;
+      const inputLain = document.getElementById('mapelLain');
+      if (mapel === 'Lainnya') {
+        inputLain.classList.remove('hidden');
+        inputLain.focus();
+      } else {
+        inputLain.classList.add('hidden');
+      }
+      simpanDraft();
+    }
+
+    function getSelectedMapel() {
+      const mapel = document.getElementById('mapel').value;
+      if (mapel === 'Lainnya') {
+        return document.getElementById('mapelLain').value.trim() || 'Mata Pelajaran SD';
+      }
+      return mapel;
+    }
+
+    function generatePromptRPM() {
+      const materi = document.getElementById('materiTopik').value.trim();
+      if (!materi) {
+        showToast('Mohon isi kolom Materi / Topik Pembelajaran terlebih dahulu.', 'error');
+        document.getElementById('materiTopik').focus();
+        return null;
+      }
+
+      const namaGuru = document.getElementById('namaGuru').value.trim() || '[Nama Guru]';
+      const nipGuru = document.getElementById('nipGuru').value.trim();
+      const namaSekolah = document.getElementById('namaSekolah').value.trim() || '[Nama Sekolah Dasar]';
+      const tahunAjaran = document.getElementById('tahunAjaran').value.trim() || '2026/2027';
+      const kelas = document.getElementById('kelas').value;
+      const fase = document.getElementById('fase').value.trim() || 'Fase C';
+      const semester = document.getElementById('semester').value;
+      const mapel = getSelectedMapel();
+      const alokasiWaktu = document.getElementById('alokasiWaktu').value.trim() || '2 x 35 menit';
+      const jumlahPertemuan = document.getElementById('jumlahPertemuan').value;
+      const subMateri = document.getElementById('subMateri').value.trim();
+
+      const cpInput = document.getElementById('cpInput').value.trim();
+      const tpInput = document.getElementById('tpInput').value.trim();
+      const kompetensiAwal = document.getElementById('kompetensiAwal').value.trim();
+      const karakteristikSiswa = document.getElementById('karakteristikSiswa').value.trim();
+
+      const dimensiList = Array.from(document.querySelectorAll('#dimensiContainer input:checked')).map(el => el.value);
+      const prinsipList = Array.from(document.querySelectorAll('#prinsipContainer input:checked')).map(el => el.value);
+      const komponenList = Array.from(document.querySelectorAll('.komponen-cb:checked')).map(el => el.value);
+
+      const model = document.getElementById('modelPembelajaran').value;
+      const metode = document.getElementById('metodePembelajaran').value.trim();
+      const kemitraan = document.getElementById('kemitraan').value.trim();
+      const lingkunganDigital = document.getElementById('lingkunganDigital').value.trim();
+      const catatanTambahan = document.getElementById('catatanTambahan').value.trim();
+
+      if (cpMode === 'manual' && !cpInput) {
+        showToast('Anda memilih CP Manual. Silakan tulis CP terlebih dahulu atau ubah ke Otomatis.', 'error');
+        document.getElementById('cpInput').focus();
+        return null;
+      }
+
+      if (tpMode === 'manual' && !tpInput) {
+        showToast('Anda memilih TP Manual. Silakan tulis TP terlebih dahulu atau ubah ke Otomatis.', 'error');
+        document.getElementById('tpInput').focus();
+        return null;
+      }
+
+      const bagianCP = (cpMode === 'manual' && cpInput)
+        ? `- Capaian Pembelajaran (CP): ${cpInput}`
+        : `- Capaian Pembelajaran (CP): Susunkan secara otomatis redaksi Capaian Pembelajaran (CP) Kurikulum Merdeka (Keputusan Kepala BSKAP terbaru) untuk mata pelajaran ${mapel} ${fase} yang paling relevan dengan topik "${materi}". Jangan mengarang nomor regulasi fiktif; beri catatan verifikasi singkat jika diperlukan.`;
+
+      const bagianTP = (tpMode === 'manual' && tpInput)
+        ? `- Tujuan Pembelajaran (TP): ${tpInput}`
+        : `- Tujuan Pembelajaran (TP): Rumuskan secara otomatis 2–3 Tujuan Pembelajaran yang spesifik, terukur, operasional, dan sesuai perkembangan kognitif siswa Kelas ${kelas} SD pada topik "${materi}".`;
+
+      const promptText = `Bertindaklah sebagai Pakar Kurikulum Sekolah Dasar dan Pengembang Perangkat Pembelajaran Mendalam (Deep Learning) di Indonesia.
+
+Buatkan dokumen **RENCANA PEMBELAJARAN MENDALAM (RPM)** yang lengkap, sistematis, operasional, realistis diterapkan di kelas, dan siap dicetak sebagai dokumen resmi guru SD berdasarkan data berikut:
+
+### A. IDENTITAS PEMBELAJARAN
+- Nama Sekolah: ${namaSekolah}
+- Nama Guru: ${namaGuru}${nipGuru ? ` (NIP: ${nipGuru})` : ''}
+- Tahun Ajaran: ${tahunAjaran}
+- Jenjang / Kelas / Fase: SD / Kelas ${kelas} / ${fase}
+- Semester: ${semester}
+- Mata Pelajaran: ${mapel}
+- Materi / Topik Utama: ${materi}${subMateri ? `\n- Submateri / Fokus Pembahasan: ${subMateri}` : ''}
+- Alokasi Waktu: ${alokasiWaktu} (${jumlahPertemuan})
+
+### B. CAPAIAN, TUJUAN & PROFIL PESERTA DIDIK
+${bagianCP}
+${bagianTP}
+- Kompetensi Awal Peserta Didik: ${kompetensiAwal || `Sesuaikan dengan kemampuan prasyarat dasar siswa kelas ${kelas} SD untuk materi "${materi}".`}
+- Karakteristik Peserta Didik: ${karakteristikSiswa || `Siswa kelas ${kelas} SD yang aktif, senang belajar melalui contoh nyata, visual, dan aktivitas kolaboratif.`}
+
+### C. KERANGKA & PRINSIP PEMBELAJARAN MENDALAM
+- Dimensi Profil Lulusan yang Dikembangkan: ${dimensiList.length ? dimensiList.join(', ') : 'Penalaran Kritis, Kolaborasi, Komunikasi, Kemandirian'}
+- Prinsip Pembelajaran Mendalam: ${prinsipList.length ? prinsipList.join(', ') : 'Berkesadaran (Mindful), Bermakna (Meaningful), Menggembirakan (Joyful)'}
+- Praktik Pedagogis (Model Pembelajaran): ${model}
+- Metode Pembelajaran: ${metode}
+- Kemitraan Pembelajaran: ${kemitraan}
+- Lingkungan Pembelajaran & Pemanfaatan Digital: ${lingkunganDigital}
+
+### D. INSTRUKSI PENYUSUNAN DOKUMEN RPM
+Susun dokumen RPM secara utuh (bukan sekadar kerangka singkat) dengan urutan struktur resmi berikut (gunakan format Markdown rapi dengan heading ## dan tabel Markdown standar tanpa kop surat maupun kolom tanda tangan karena sudah disediakan otomatis oleh sistem):
+1. **Identitas Modul/RPM** dalam format tabel rapi.
+2. **Komponen Inti Perencanaan** (CP, TP, Pemahaman Bermakna, Pertanyaan Pemantik, Dimensi Profil Lulusan, dan Kerangka Pembelajaran Mendalam).
+3. **Langkah-Langkah Kegiatan Pembelajaran Terperinci** yang selaras dengan sintaks **${model}** dan memuat tiga pengalaman belajar utama secara eksplisit:
+   - **Kegiatan Awal** (salam, doa, cek kesiapan, apersepsi kontekstual dekat dengan dunia anak SD, motivasi, dan penyampaian tujuan) beserta estimasi menit.
+   - **Kegiatan Inti** yang terbagi jelas menjadi tahapan **Memahami**, **Mengaplikasi**, dan **Merefleksi** dengan aktivitas nyata peserta didik yang konkret, runtut, dan sesuai usia kelas ${kelas} SD, beserta estimasi menit.
+   - **Kegiatan Penutup** (penyimpulan bersama, umpan balik positif, penguatan karakter, tindak lanjut, dan doa penutup) beserta estimasi menit.
+   *(Pastikan jumlah seluruh menit kegiatan Awal + Inti + Penutup tepat sesuai alokasi waktu ${alokasiWaktu}).*
+4. **Komponen Pelengkap Wajib**:
+${komponenList.map(item => `   - ${item}`).join('\n')}
+${catatanTambahan ? `\n### E. CATATAN KHUSUS DARI GURU\n- ${catatanTambahan}` : ''}
+
+Gunakan bahasa Indonesia yang baku, komunikatif, ramah guru SD, serta pastikan seluruh aktivitas, LKPD, rubrik, dan soal evaluasi saling selaras dengan Tujuan Pembelajaran. Langsung mulai dari bagian I tanpa kalimat pembuka/penutup percakapan.`;
+
+      document.getElementById('hasilPrompt').value = promptText;
+      simpanDraft();
+      return {
+        promptText,
+        meta: {
+          judul: `${mapel} – ${materi}`,
+          info: `Kelas ${kelas} (${fase}) • ${alokasiWaktu}`,
+          data: {
+            namaGuru, nipGuru, namaSekolah, tahunAjaran, kelas, fase, semester,
+            mapel: document.getElementById('mapel').value,
+            mapelLain: document.getElementById('mapelLain').value,
+            alokasiWaktu, jumlahPertemuan, materi, subMateri,
+            cpMode, tpMode, cpInput, tpInput, kompetensiAwal, karakteristikSiswa,
+            model, metode, kemitraan, lingkunganDigital, catatanTambahan
+          }
+        }
+      };
+    }
+
+    async function callGeminiWithBackoff(promptText) {
+      const apiKey = "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+      const payload = {
+        contents: [{ parts: [{ text: promptText }] }],
+        systemInstruction: {
+          parts: [{
+            text: "Anda adalah pakar kurikulum SD Indonesia. Hasilkan dokumen Rencana Pembelajaran Mendalam (RPM) lengkap dalam format Markdown bersih (menggunakan heading ## dan tabel Markdown) tanpa basa-basi pembuka atau penutup."
+          }]
+        }
+      };
+
+      const delays = [1000, 2000, 4000, 8000];
+      for (let attempt = 0; attempt <= delays.length; attempt++) {
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          const result = await response.json();
+          const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (!text) throw new Error('Respons AI kosong');
+          return text.trim();
+        } catch (err) {
+          if (attempt === delays.length) throw err;
+          await new Promise(resolve => setTimeout(resolve, delays[attempt]));
+        }
+      }
+    }
+
+    async function generatePromptDanRpmOtomatis() {
+      const generated = generatePromptRPM();
+      if (!generated) return;
+
+      switchRightTab('export');
+      const btn = document.getElementById('btnGenerateUtama');
+      const loadingBox = document.getElementById('aiLoadingBox');
+      const badge = document.getElementById('statusBadge');
+      const subtitle = document.getElementById('aiStatusSubtitle');
+      const editor = document.getElementById('rpmMarkdownInput');
+
+      btn.disabled = true;
+      btn.classList.add('opacity-75', 'cursor-not-allowed');
+      loadingBox.classList.remove('hidden');
+      badge.textContent = 'Menyusun RPM...';
+      badge.className = 'text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-400/25 text-amber-200 border border-amber-300/40 shrink-0';
+      subtitle.textContent = 'Gemini AI sedang menulis dokumen RPM Anda...';
+
+      try {
+        const hasilRpmAi = await callGeminiWithBackoff(generated.promptText);
+        editor.value = hasilRpmAi;
+        updatePratinjauDokumen();
+
+        badge.textContent = 'Siap Unduh DOCX/PDF';
+        badge.className = 'text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/25 text-emerald-200 border border-emerald-400/40 shrink-0';
+        subtitle.textContent = 'Dokumen RPM lengkap siap diunduh ke Word atau PDF!';
+
+        simpanKeRiwayat({
+          id: Date.now(),
+          judul: generated.meta.judul,
+          info: generated.meta.info,
+          prompt: generated.promptText,
+          rpmContent: hasilRpmAi,
+          data: generated.meta.data
+        });
+
+        showToast('Dokumen RPM dari Gemini selesai dibuat! Silakan unduh Word atau PDF.');
+      } catch (error) {
+        // Fallback otomatis menyusun draf RPM terstruktur apabila jaringan/API sedang offline
+        isiDrafOtomatisKeEditor(false);
+        const fallbackContent = editor.value;
+        badge.textContent = 'Draf Siap Unduh';
+        badge.className = 'text-[11px] font-semibold px-2.5 py-1 rounded-full bg-sky-500/25 text-sky-200 border border-sky-400/40 shrink-0';
+        subtitle.textContent = 'Menggunakan draf RPM terstruktur siap unduh DOCX/PDF.';
+
+        simpanKeRiwayat({
+          id: Date.now(),
+          judul: generated.meta.judul,
+          info: generated.meta.info,
+          prompt: generated.promptText,
+          rpmContent: fallbackContent,
+          data: generated.meta.data
+        });
+
+        showToast('Draf dokumen RPM siap diunduh Word (.DOCX) atau PDF!');
+      } finally {
+        loadingBox.classList.add('hidden');
+        btn.disabled = false;
+        btn.classList.remove('opacity-75', 'cursor-not-allowed');
+      }
+    }
+
+    // ==================== SWITCH TAB KANAN & EKSPOR DOCX / PDF ====================
+    function switchRightTab(tab) {
+      const btnPrompt = document.getElementById('tabBtnPrompt');
+      const btnExport = document.getElementById('tabBtnExport');
+      const panelPrompt = document.getElementById('rightPanelPrompt');
+      const panelExport = document.getElementById('rightPanelExport');
+
+      if (tab === 'export') {
+        btnExport.className = 'flex-1 py-2 px-3 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 shadow transition flex items-center justify-center gap-1.5';
+        btnPrompt.className = 'flex-1 py-2 px-3 rounded-lg text-xs font-semibold text-sky-200 hover:text-white transition flex items-center justify-center gap-1.5';
+        panelPrompt.classList.add('hidden');
+        panelExport.classList.remove('hidden');
+        updatePratinjauDokumen();
+      } else {
+        btnPrompt.className = 'flex-1 py-2 px-3 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 shadow transition flex items-center justify-center gap-1.5';
+        btnExport.className = 'flex-1 py-2 px-3 rounded-lg text-xs font-semibold text-sky-200 hover:text-white transition flex items-center justify-center gap-1.5';
+        panelExport.classList.add('hidden');
+        panelPrompt.classList.remove('hidden');
+      }
+    }
+
+    function isiDrafOtomatisKeEditor(notify = true) {
+      const namaGuru = document.getElementById('namaGuru').value.trim() || 'Wahyono, S.Pd.SD.';
+      const nipGuru = document.getElementById('nipGuru').value.trim() || '-';
+      const namaSekolah = document.getElementById('namaSekolah').value.trim() || 'SD Negeri Kampung Laut';
+      const tahunAjaran = document.getElementById('tahunAjaran').value.trim() || '2026/2027';
+      const kelas = document.getElementById('kelas').value;
+      const fase = document.getElementById('fase').value.trim() || 'Fase C';
+      const semester = document.getElementById('semester').value;
+      const mapel = getSelectedMapel();
+      const alokasiWaktu = document.getElementById('alokasiWaktu').value.trim() || '2 x 35 menit (70 menit)';
+      const jumlahPertemuan = document.getElementById('jumlahPertemuan').value;
+      const materi = document.getElementById('materiTopik').value.trim() || 'Materi Pembelajaran SD';
+      const subMateri = document.getElementById('subMateri').value.trim() || materi;
+      const cpVal = (cpMode === 'manual' && document.getElementById('cpInput').value.trim())
+        ? document.getElementById('cpInput').value.trim()
+        : `Peserta didik memahami dan menerapkan konsep ${materi} sesuai Capaian Pembelajaran ${mapel} ${fase}.`;
+      const tpVal = (tpMode === 'manual' && document.getElementById('tpInput').value.trim())
+        ? document.getElementById('tpInput').value.trim()
+        : `1. Melalui pengamatan dan diskusi, peserta didik mampu menjelaskan konsep ${materi} dengan tepat.\n2. Melalui aktivitas kelompok/LKPD, peserta didik mampu menerapkan pemahaman ${materi} dalam kehidupan sehari-hari.`;
+      const dimensiList = Array.from(document.querySelectorAll('#dimensiContainer input:checked')).map(el => el.value);
+      const prinsipList = Array.from(document.querySelectorAll('#prinsipContainer input:checked')).map(el => el.value);
+      const model = document.getElementById('modelPembelajaran').value;
+      const metode = document.getElementById('metodePembelajaran').value.trim();
+
+      const drafMarkdown = `## I. IDENTITAS PEMBELAJARAN
+| Komponen | Keterangan |
+| :--- | :--- |
+| **Satuan Pendidikan** | ${namaSekolah} |
+| **Nama Penyusun / NIP** | ${namaGuru} (NIP: ${nipGuru}) |
+| **Tahun Ajaran / Semester** | ${tahunAjaran} / Semester ${semester} |
+| **Jenjang / Kelas / Fase** | Sekolah Dasar / Kelas ${kelas} / ${fase} |
+| **Mata Pelajaran** | ${mapel} |
+| **Materi / Topik Utama** | ${materi} |
+| **Submateri** | ${subMateri} |
+| **Alokasi Waktu** | ${alokasiWaktu} (${jumlahPertemuan}) |
+
+## II. KOMPONEN PERENCANAAN PEMBELAJARAN MENDALAM
+### A. Capaian Pembelajaran (CP)
+${cpVal}
+
+### B. Tujuan Pembelajaran (TP)
+${tpVal}
+
+### C. Dimensi Profil Lulusan & Prinsip Pembelajaran
+- **Dimensi Profil Lulusan:** ${dimensiList.join(', ') || 'Penalaran Kritis, Kolaborasi, Komunikasi'}
+- **Prinsip Pembelajaran Mendalam:** ${prinsipList.join(', ') || 'Berkesadaran, Bermakna, Menggembirakan'}
+- **Model & Metode Pembelajaran:** ${model} (${metode})
+
+## III. LANGKAH-LANGKAH KEGIATAN PEMBELAJARAN
+### 1. Kegiatan Awal (10 Menit)
+- Guru membuka pelajaran dengan salam, menanyakan kabar, dan mengajak peserta didik berdoa bersama (Berkesadaran).
+- Guru mengecek kehadiran dan kesiapan belajar siswa melalui ice breaking singkat.
+- **Apersepsi & Motivasi:** Guru mengaitkan pengalaman sehari-hari siswa dengan topik **${materi}** serta menyampaikan tujuan pembelajaran (Bermakna).
+
+### 2. Kegiatan Inti (50 Menit) – Sintaks ${model}
+- **Tahap Memahami:** Peserta didik mengamati media visual/benda konkret terkait **${materi}**, berdiskusi tanya jawab untuk membangun pemahaman konsep dasar.
+- **Tahap Mengaplikasi:** Dalam kelompok kecil, peserta didik mengerjakan Lembar Kerja Peserta Didik (LKPD) dan mempraktikkan pemecahan masalah nyata terkait **${subMateri}** (Menggembirakan & Kolaboratif).
+- **Tahap Merefleksi:** Perwakilan kelompok mempresentasikan hasil temuan, saling memberikan apresiasi, dan menyimpulkan makna pembelajaran bersama guru.
+
+### 3. Kegiatan Penutup (10 Menit)
+- Peserta didik bersama guru merangkum inti materi **${materi}**.
+- Refleksi perasaan dan pemahaman siswa, pemberian umpan balik positif, tugas tindak lanjut di rumah, serta doa penutup.
+
+## IV. ASESMEN & RUBRIK PENILAIAN
+- **Asesmen Awal (Diagnostik):** Tanya jawab pemantik di awal pembelajaran.
+- **Asesmen Proses (Formatif):** Observasi keaktifan diskusi kelompok dan penilaian kinerja pada LKPD.
+- **Asesmen Akhir (Sumatif):** Tes tertulis singkat (isian & uraian kontekstual) sesuai Tujuan Pembelajaran.
+
+| Aspek Penilaian | Perlu Bimbingan (1) | Cukup (2) | Cakap (3) | Mahir (4) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Pemahaman Konsep** | Belum mampu menjelaskan konsep dasar meskipun dibimbing. | Mampu menyebutkan sebagian konsep dengan bantuan. | Mampu menjelaskan konsep ${materi} secara tepat. | Mampu menjelaskan secara mendalam dan memberi contoh baru. |
+| **Keterampilan & Kolaborasi** | Memerlukan bimbingan penuh saat mengerjakan LKPD. | Mengikuti sebagian langkah kegiatan kelompok. | Aktif berdiskusi dan menyelesaikan LKPD dengan runtut. | Memimpin diskusi dengan baik dan mempresentasikan hasil secara percaya diri. |`;
+
+      document.getElementById('rpmMarkdownInput').value = drafMarkdown;
+      updatePratinjauDokumen();
+      if (notify) showToast('Draf dokumen RPM siap ekspor berhasil disusun!');
+    }
+
+    function updatePratinjauDokumen() {
+      const namaSekolah = document.getElementById('namaSekolah').value.trim() || 'SEKOLAH DASAR';
+      const tahunAjaran = document.getElementById('tahunAjaran').value.trim() || '2026/2027';
+      const semester = document.getElementById('semester').value;
+      const namaGuru = document.getElementById('namaGuru').value.trim() || '........................................';
+      const nipGuru = document.getElementById('nipGuru').value.trim() || '....................................';
+      const rawMarkdown = document.getElementById('rpmMarkdownInput').value.trim();
+
+      const bodyHtml = rawMarkdown && typeof marked !== 'undefined'
+        ? marked.parse(rawMarkdown)
+        : `<p style="color:#64748b;font-style:italic;">Tempelkan hasil RPM dari Gemini di kotak editor sebelah kiri, atau klik "Draf Otomatis".</p>`;
+
+      const fullHtml = `
+        <div style="text-align:center; border-bottom: 3px double #0f172a; padding-bottom: 10px; margin-bottom: 14px;">
+          <div style="font-size: 16px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase;">
+            RENCANA PEMBELAJARAN MENDALAM (RPM)
+          </div>
+          <div style="font-size: 14px; font-weight: 700; margin-top: 2px;">
+            ${escapeHtml(namaSekolah)}
+          </div>
+          <div style="font-size: 12px; color: #334155; margin-top: 2px;">
+            Tahun Ajaran ${escapeHtml(tahunAjaran)} &bull; Semester ${escapeHtml(semester)}
+          </div>
+        </div>
+        <div>${bodyHtml}</div>
+        <table style="width:100%; border:none; margin-top: 26px;">
+          <tr>
+            <td style="border:none; width:50%; text-align:center; padding:6px;">
+              Mengetahui,<br>Kepala ${escapeHtml(namaSekolah)}
+              <br><br><br><br>
+              <strong><u>....................................................</u></strong><br>
+              NIP. ........................................
+            </td>
+            <td style="border:none; width:50%; text-align:center; padding:6px;">
+              ...................., ........................ 2026<br>Guru Kelas / Mata Pelajaran
+              <br><br><br><br>
+              <strong><u>${escapeHtml(namaGuru)}</u></strong><br>
+              NIP. ${escapeHtml(nipGuru)}
+            </td>
+          </tr>
+        </table>
+      `;
+
+      document.getElementById('printableRpmArea').innerHTML = fullHtml;
+    }
+
+    function bukaModalPratinjau() {
+      if (!document.getElementById('rpmMarkdownInput').value.trim()) {
+        isiDrafOtomatisKeEditor(false);
+      }
+      updatePratinjauDokumen();
+      const modal = document.getElementById('previewDocModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function tutupModalPratinjau() {
+      const modal = document.getElementById('previewDocModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function cetakAtauSimpanPdf() {
+      if (!document.getElementById('rpmMarkdownInput').value.trim()) {
+        isiDrafOtomatisKeEditor(false);
+      }
+      updatePratinjauDokumen();
+      showToast('Membuka dialog Cetak / Simpan sebagai PDF...');
+      setTimeout(() => {
+        window.print();
+      }, 250);
+    }
+
+    async function unduhFileDocx() {
+      if (!document.getElementById('rpmMarkdownInput').value.trim()) {
+        isiDrafOtomatisKeEditor(false);
+      }
+      updatePratinjauDokumen();
+
+      const materi = (document.getElementById('materiTopik').value.trim() || 'Dokumen_RPM_SD').replace(/[^a-zA-Z0-9_-]/g, '_');
+      const namaSekolah = document.getElementById('namaSekolah').value.trim() || 'SEKOLAH DASAR';
+      const tahunAjaran = document.getElementById('tahunAjaran').value.trim() || '2026/2027';
+      const semester = document.getElementById('semester').value;
+      const namaGuru = document.getElementById('namaGuru').value.trim() || '........................................';
+      const nipGuru = document.getElementById('nipGuru').value.trim() || '....................................';
+
+      // Gunakan library docx.js untuk menghasilkan file .docx asli
+      if (typeof window.docx !== 'undefined') {
+        try {
+          const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, AlignmentType, BorderStyle } = window.docx;
+          const container = document.getElementById('printableRpmArea');
+          const docChildren = [];
+
+          // Kop Dokumen Resmi
+          docChildren.push(
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 60 },
+              children: [new TextRun({ text: 'RENCANA PEMBELAJARAN MENDALAM (RPM)', bold: true, size: 28, font: 'Times New Roman' })]
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 60 },
+              children: [new TextRun({ text: namaSekolah.toUpperCase(), bold: true, size: 24, font: 'Times New Roman' })]
+            }),
+            new Paragraph({
+              alignment: AlignmentType.CENTER,
+              spacing: { after: 240 },
+              border: { bottom: { color: '000000', space: 6, style: BorderStyle.DOUBLE, size: 12 } },
+              children: [new TextRun({ text: `Tahun Ajaran ${tahunAjaran} • Semester ${semester}`, size: 22, font: 'Times New Roman' })]
+            })
+          );
+
+          // Parse elemen HTML hasil pratinjau menjadi paragraf & tabel Word asli
+          const contentRoot = container.children[1];
+          if (contentRoot) {
+            Array.from(contentRoot.children).forEach(el => {
+              const tag = el.tagName;
+              if (tag === 'H1' || tag === 'H2' || tag === 'H3') {
+                docChildren.push(
+                  new Paragraph({
+                    spacing: { before: 180, after: 80 },
+                    children: [new TextRun({ text: el.innerText.trim(), bold: true, size: tag === 'H3' ? 23 : 25, font: 'Times New Roman', color: '0B2240' })]
+                  })
+                );
+              } else if (tag === 'UL' || tag === 'OL') {
+                Array.from(el.querySelectorAll('li')).forEach((li, idx) => {
+                  const prefix = tag === 'OL' ? `${idx + 1}. ` : '• ';
+                  docChildren.push(
+                    new Paragraph({
+                      spacing: { after: 60 },
+                      indent: { left: 360 },
+                      children: [new TextRun({ text: prefix + li.innerText.trim(), size: 22, font: 'Times New Roman' })]
+                    })
+                  );
+                });
+              } else if (tag === 'TABLE') {
+                const trs = Array.from(el.querySelectorAll('tr'));
+                if (trs.length > 0) {
+                  const tableRows = trs.map((tr, rIdx) => {
+                    const cells = Array.from(tr.querySelectorAll('th, td'));
+                    return new TableRow({
+                      children: cells.map(cell => new TableCell({
+                        shading: rIdx === 0 ? { fill: 'E2E8F0' } : undefined,
+                        margins: { top: 80, bottom: 80, left: 120, right: 120 },
+                        children: [
+                          new Paragraph({
+                            children: [
+                              new TextRun({
+                                text: cell.innerText.trim(),
+                                bold: cell.tagName === 'TH' || rIdx === 0,
+                                size: 21,
+                                font: 'Times New Roman'
+                              })
+                            ]
+                          })
+                        ]
+                      }))
+                    });
+                  });
+                  docChildren.push(
+                    new Table({
+                      width: { size: 100, type: WidthType.PERCENTAGE },
+                      rows: tableRows
+                    }),
+                    new Paragraph({ spacing: { after: 120 }, children: [] })
+                  );
+                }
+              } else {
+                const txt = el.innerText.trim();
+                if (txt) {
+                  docChildren.push(
+                    new Paragraph({
+                      spacing: { after: 90 },
+                      children: [new TextRun({ text: txt, size: 22, font: 'Times New Roman' })]
+                    })
+                  );
+                }
+              }
+            });
+          }
+
+          // Tabel Tanda Tangan Tanpa Garis
+          const noBorder = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+          const cellBorders = { top: noBorder, bottom: noBorder, left: noBorder, right: noBorder };
+          docChildren.push(
+            new Paragraph({ spacing: { before: 240 }, children: [] }),
+            new Table({
+              width: { size: 100, type: WidthType.PERCENTAGE },
+              rows: [
+                new TableRow({
+                  children: [
+                    new TableCell({
+                      borders: cellBorders,
+                      width: { size: 50, type: WidthType.PERCENTAGE },
+                      children: [
+                        new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: `Mengetahui,\nKepala ${namaSekolah}`, size: 22, font: 'Times New Roman' })] }),
+                        new Paragraph({ spacing: { before: 600 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: '....................................................', bold: true, underline: {}, size: 22, font: 'Times New Roman' })] }),
+                        new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'NIP. ........................................', size: 22, font: 'Times New Roman' })] })
+                      ]
+                    }),
+                    new TableCell({
+                      borders: cellBorders,
+                      width: { size: 50, type: WidthType.PERCENTAGE },
+                      children: [
+                        new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: '...................., ........................ 2026\nGuru Kelas / Mata Pelajaran', size: 22, font: 'Times New Roman' })] }),
+                        new Paragraph({ spacing: { before: 600 }, alignment: AlignmentType.CENTER, children: [new TextRun({ text: namaGuru, bold: true, underline: {}, size: 22, font: 'Times New Roman' })] }),
+                        new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: `NIP. ${nipGuru}`, size: 22, font: 'Times New Roman' })] })
+                      ]
+                    })
+                  ]
+                })
+              ]
+            })
+          );
+
+          const doc = new Document({
+            sections: [{
+              properties: { page: { margin: { top: 1134, right: 1134, bottom: 1134, left: 1134 } } },
+              children: docChildren
+            }]
+          });
+
+          const blob = await Packer.toBlob(doc);
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `RPM_SD_${materi}.docx`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showToast(`File Word "RPM_SD_${materi}.docx" berhasil diunduh!`);
+          return;
+        } catch (err) {
+          console.warn('Fallback ke ekspor Word standar:', err);
+        }
+      }
+
+      // Fallback apabila library CDN sedang offline
+      const htmlContent = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><style>body{font-family:'Times New Roman',serif;font-size:12pt;}table{width:100%;border-collapse:collapse;}th,td{border:1px solid #000;padding:5pt;}</style></head><body>${document.getElementById('printableRpmArea').innerHTML}</body></html>`;
+      const blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `RPM_SD_${materi}.doc`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('File Dokumen Word berhasil diunduh!');
+    }
+
+    function salinPrompt() {
+      const textarea = document.getElementById('hasilPrompt');
+      if (!textarea.value.trim()) {
+        showToast('Belum ada prompt. Klik Generate Prompt terlebih dahulu.', 'error');
+        return;
+      }
+      textarea.select();
+      textarea.setSelectionRange(0, 99999);
+      try {
+        document.execCommand('copy');
+        showToast('Prompt RPM berhasil disalin ke clipboard!');
+      } catch (e) {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(textarea.value).then(() => {
+            showToast('Prompt RPM berhasil disalin ke clipboard!');
+          });
+        }
+      }
+    }
+
+    function unduhTxt() {
+      const teks = document.getElementById('hasilPrompt').value.trim();
+      if (!teks) {
+        showToast('Belum ada prompt untuk diunduh.', 'error');
+        return;
+      }
+      const materi = (document.getElementById('materiTopik').value.trim() || 'RPM_SD').replace(/[^a-zA-Z0-9_-]/g, '_');
+      const blob = new Blob([teks], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Prompt_RPM_${materi}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('File Prompt .TXT berhasil diunduh!');
+    }
+
+    function fillSampleData() {
+      document.getElementById('namaGuru').value = 'Wahyono, S.Pd.SD.';
+      document.getElementById('namaSekolah').value = 'SD Negeri Kampung Laut';
+      document.getElementById('kelas').value = '5';
+      updateFaseOtomatis();
+      document.getElementById('semester').value = '1 (Ganjil)';
+      document.getElementById('mapel').value = 'IPAS (Ilmu Pengetahuan Alam dan Sosial)';
+      toggleMapelLain();
+      document.getElementById('alokasiWaktu').value = '2 x 35 menit (70 menit)';
+      document.getElementById('jumlahPertemuan').value = '1 Pertemuan';
+      document.getElementById('materiTopik').value = 'Jaring-Jaring Makanan dan Keseimbangan Ekosistem';
+      document.getElementById('subMateri').value = 'Hubungan makan dan dimakan antar makhluk hidup serta dampak perubahan populasi';
+      setModeCP('auto', false);
+      document.getElementById('cpInput').value = '';
+      setModeTP('manual', false);
+      document.getElementById('tpInput').value = 'Peserta didik mampu menganalisis hubungan antarkomponen dalam jaring-jaring makanan serta memprediksi dampak perubahan salah satu populasi terhadap keseimbangan ekosistem.';
+      document.getElementById('kompetensiAwal').value = 'Peserta didik telah mengenal contoh makhluk hidup (tumbuhan dan hewan) di lingkungan sekitar.';
+      document.getElementById('karakteristikSiswa').value = 'Siswa kelas 5 SD di lingkungan pesisir/desa yang akrab dengan ekosistem sawah, sungai, dan tambak.';
+      generatePromptDanRpmOtomatis();
+    }
+
+    function resetForm() {
+      showConfirmDialog(
+        'Reset Formulir?',
+        'Seluruh isian formulir dan kotak hasil prompt saat ini akan dibersihkan. Riwayat yang sudah tersimpan tidak akan terhapus.',
+        () => {
+          localStorage.removeItem(DRAFT_KEY);
+          document.getElementById('materiTopik').value = '';
+          document.getElementById('subMateri').value = '';
+          setModeCP('auto', false);
+          setModeTP('auto', false);
+          document.getElementById('cpInput').value = '';
+          document.getElementById('tpInput').value = '';
+          document.getElementById('kompetensiAwal').value = '';
+          document.getElementById('karakteristikSiswa').value = '';
+          document.getElementById('catatanTambahan').value = '';
+          document.getElementById('hasilPrompt').value = '';
+          const badge = document.getElementById('statusBadge');
+          badge.textContent = 'Menunggu Input';
+          badge.className = 'text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600';
+          showToast('Formulir berhasil dibersihkan.');
+        }
+      );
+    }
+
+    function simpanDraft() {
+      try {
+        const draft = {
+          namaGuru: document.getElementById('namaGuru').value,
+          nipGuru: document.getElementById('nipGuru').value,
+          namaSekolah: document.getElementById('namaSekolah').value,
+          tahunAjaran: document.getElementById('tahunAjaran').value,
+          kelas: document.getElementById('kelas').value,
+          fase: document.getElementById('fase').value,
+          semester: document.getElementById('semester').value,
+          mapel: document.getElementById('mapel').value,
+          mapelLain: document.getElementById('mapelLain').value,
+          alokasiWaktu: document.getElementById('alokasiWaktu').value,
+          jumlahPertemuan: document.getElementById('jumlahPertemuan').value,
+          materi: document.getElementById('materiTopik').value,
+          subMateri: document.getElementById('subMateri').value,
+          cpMode: cpMode,
+          tpMode: tpMode,
+          cpInput: document.getElementById('cpInput').value,
+          tpInput: document.getElementById('tpInput').value,
+          kompetensiAwal: document.getElementById('kompetensiAwal').value,
+          karakteristikSiswa: document.getElementById('karakteristikSiswa').value,
+          model: document.getElementById('modelPembelajaran').value,
+          metode: document.getElementById('metodePembelajaran').value,
+          kemitraan: document.getElementById('kemitraan').value,
+          lingkunganDigital: document.getElementById('lingkunganDigital').value,
+          catatanTambahan: document.getElementById('catatanTambahan').value
+        };
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      } catch (e) {}
+    }
+
+    function muatDraft() {
+      try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) return;
+        const d = JSON.parse(raw);
+        document.getElementById('namaGuru').value = d.namaGuru || '';
+        document.getElementById('nipGuru').value = d.nipGuru || '';
+        document.getElementById('namaSekolah').value = d.namaSekolah || '';
+        document.getElementById('tahunAjaran').value = d.tahunAjaran || '2026/2027';
+        document.getElementById('kelas').value = d.kelas || '5';
+        updateFaseOtomatis();
+        document.getElementById('semester').value = d.semester || '1 (Ganjil)';
+        document.getElementById('mapel').value = d.mapel || 'IPAS (Ilmu Pengetahuan Alam dan Sosial)';
+        document.getElementById('mapelLain').value = d.mapelLain || '';
+        toggleMapelLain();
+        document.getElementById('alokasiWaktu').value = d.alokasiWaktu || '2 x 35 menit (70 menit)';
+        document.getElementById('jumlahPertemuan').value = d.jumlahPertemuan || '1 Pertemuan';
+        document.getElementById('materiTopik').value = d.materi || '';
+        document.getElementById('subMateri').value = d.subMateri || '';
+        setModeCP(d.cpMode || 'auto', false);
+        setModeTP(d.tpMode || 'auto', false);
+        document.getElementById('cpInput').value = d.cpInput || '';
+        document.getElementById('tpInput').value = d.tpInput || '';
+        document.getElementById('kompetensiAwal').value = d.kompetensiAwal || '';
+        document.getElementById('karakteristikSiswa').value = d.karakteristikSiswa || '';
+        document.getElementById('modelPembelajaran').value = d.model || 'Problem Based Learning (PBL)';
+        document.getElementById('metodePembelajaran').value = d.metode || '';
+        document.getElementById('kemitraan').value = d.kemitraan || '';
+        document.getElementById('lingkunganDigital').value = d.lingkunganDigital || '';
+        document.getElementById('catatanTambahan').value = d.catatanTambahan || '';
+      } catch (e) {}
+    }
+
+    function getRiwayat() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function simpanKeRiwayat(item) {
+      const list = getRiwayat();
+      list.unshift(item);
+      if (list.length > 15) list.pop();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      renderRiwayat();
+    }
+
+    function renderRiwayat() {
+      const container = document.getElementById('riwayatList');
+      const list = getRiwayat();
+
+      if (!list.length) {
+        container.innerHTML = '<p class="text-xs text-sky-200/60 italic">Belum ada riwayat prompt RPM.</p>';
+        return;
+      }
+
+      container.innerHTML = list.map(item => `
+        <div class="p-2.5 rounded-xl border border-white/15 bg-white/10 hover:bg-white/15 transition flex items-center justify-between gap-2">
+          <div class="min-w-0 cursor-pointer flex-1" onclick="muatRiwayat(${item.id})">
+            <p class="text-xs font-bold text-white truncate">${escapeHtml(item.judul)}</p>
+            <p class="text-[11px] text-sky-200/80 truncate">${escapeHtml(item.info)}</p>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button type="button" onclick="muatRiwayat(${item.id})" class="px-2.5 py-1 rounded-lg bg-amber-400/25 text-amber-200 text-[11px] font-semibold hover:bg-amber-400/40">
+              Muat
+            </button>
+            <button type="button" onclick="hapusSatuRiwayat(${item.id})" class="p-1.5 rounded-lg text-slate-300 hover:text-rose-300" title="Hapus">
+              <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function muatRiwayat(id) {
+      const item = getRiwayat().find(x => x.id === id);
+      if (!item) return;
+      document.getElementById('hasilPrompt').value = item.prompt;
+      if (item.rpmContent) {
+        document.getElementById('rpmMarkdownInput').value = item.rpmContent;
+        updatePratinjauDokumen();
+      }
+      if (item.data) {
+        document.getElementById('namaGuru').value = item.data.namaGuru || '';
+        document.getElementById('nipGuru').value = item.data.nipGuru || '';
+        document.getElementById('namaSekolah').value = item.data.namaSekolah || '';
+        document.getElementById('tahunAjaran').value = item.data.tahunAjaran || '2026/2027';
+        document.getElementById('kelas').value = item.data.kelas || '5';
+        updateFaseOtomatis();
+        document.getElementById('semester').value = item.data.semester || '1 (Ganjil)';
+        document.getElementById('mapel').value = item.data.mapel || 'IPAS (Ilmu Pengetahuan Alam dan Sosial)';
+        document.getElementById('mapelLain').value = item.data.mapelLain || '';
+        toggleMapelLain();
+        document.getElementById('alokasiWaktu').value = item.data.alokasiWaktu || '2 x 35 menit';
+        document.getElementById('jumlahPertemuan').value = item.data.jumlahPertemuan || '1 Pertemuan';
+        document.getElementById('materiTopik').value = item.data.materi || '';
+        document.getElementById('subMateri').value = item.data.subMateri || '';
+        setModeCP(item.data.cpMode || (item.data.cpInput ? 'manual' : 'auto'), false);
+        setModeTP(item.data.tpMode || (item.data.tpInput ? 'manual' : 'auto'), false);
+        document.getElementById('cpInput').value = item.data.cpInput || '';
+        document.getElementById('tpInput').value = item.data.tpInput || '';
+        document.getElementById('kompetensiAwal').value = item.data.kompetensiAwal || '';
+        document.getElementById('karakteristikSiswa').value = item.data.karakteristikSiswa || '';
+        document.getElementById('modelPembelajaran').value = item.data.model || 'Problem Based Learning (PBL)';
+        document.getElementById('metodePembelajaran').value = item.data.metode || '';
+        document.getElementById('kemitraan').value = item.data.kemitraan || '';
+        document.getElementById('lingkunganDigital').value = item.data.lingkunganDigital || '';
+        document.getElementById('catatanTambahan').value = item.data.catatanTambahan || '';
+      }
+      const badge = document.getElementById('statusBadge');
+      badge.textContent = 'Dimuat dari Riwayat';
+      badge.className = 'text-[11px] font-semibold px-2.5 py-1 rounded-full bg-blue-100 text-blue-800';
+      showToast('Riwayat prompt berhasil dimuat kembali.');
+    }
+
+    function hapusSatuRiwayat(id) {
+      const list = getRiwayat().filter(x => x.id !== id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      renderRiwayat();
+    }
+
+    function hapusSemuaRiwayat() {
+      const list = getRiwayat();
+      if (!list.length) {
+        showToast('Riwayat sudah kosong.');
+        return;
+      }
+      showConfirmDialog(
+        'Hapus Semua Riwayat?',
+        'Seluruh riwayat prompt RPM yang tersimpan di perangkat ini akan dihapus permanen.',
+        () => {
+          localStorage.removeItem(STORAGE_KEY);
+          renderRiwayat();
+          showToast('Semua riwayat prompt dihapus.');
+        }
+      );
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[m]));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem(THEME_KEY);
+      if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+      muatDraft();
+      updateFaseOtomatis();
+      renderRiwayat();
+      document.querySelectorAll('input, select, textarea').forEach(el => {
+        if (el.id !== 'hasilPrompt') {
+          el.addEventListener('change', simpanDraft);
+          el.addEventListener('input', simpanDraft);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
