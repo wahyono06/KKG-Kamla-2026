@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Sejarah Lahirnya Pancasila - Kelas 5 SD/MI</title>
+    <!-- Tailwind CSS untuk tata letak responsif dan modern -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka (ramah anak/kartun) & Nunito (sangat mudah dibaca) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Pengaturan Font dan Gaya Kartun 2D */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 50%, #FDBA74 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        h1, h2, h3, .font-cartoon {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Pola Latar Belakang Kartun Halus */
+        .bg-pattern {
+            background-image: radial-gradient(#F59E0B 1.5px, transparent 1.5px), radial-gradient(#EF4444 1.5px, #FEF3C7 1.5px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        /* Gaya Tombol 3D Kartun */
+        .btn-cartoon {
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+        }
+        .btn-cartoon:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        .btn-cartoon:active:not(:disabled) {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* Gaya Kartu Drag & Drop */
+        .draggable-card {
+            cursor: grab;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            touch-action: none; /* Mencegah scroll saat drag di layar sentuh */
+        }
+        .draggable-card:active {
+            cursor: grabbing;
+        }
+        .draggable-card.dragging {
+            opacity: 0.6;
+            transform: scale(0.95);
+        }
+        .draggable-card.selected-tap {
+            ring: 4px solid #3B82F6;
+            transform: scale(1.03);
+            background-color: #EFF6FF;
+            border-color: #2563EB;
+        }
+
+        /* Zona Drop */
+        .drop-zone {
+            transition: all 0.25s ease;
+            border: 3px dashed #9CA3AF;
+        }
+        .drop-zone.drag-over {
+            border-color: #EF4444;
+            background-color: #FEF2F2;
+            transform: scale(1.02);
+        }
+        .drop-zone.filled {
+            border-style: solid;
+            border-color: #10B981;
+            background-color: #ECFDF5;
+        }
+
+        /* Animasi Karakter & UI */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            70% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        /* Kloning visual saat touch drag */
+        #touch-ghost {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.9;
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+        }
+    </style>
+</head>
+<body class="bg-pattern text-slate-800 flex flex-col justify-between">
+
+    <!-- Header / Navigasi Atas -->
+    <header class="w-full bg-red-600 text-white shadow-lg border-b-4 border-red-800 sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-2">
+            <!-- Logo & Judul Singkat -->
+            <div class="flex items-center gap-2.5">
+                <div class="bg-amber-400 p-1.5 rounded-xl border-2 border-white shadow-sm">
+                    <!-- Ikon Garuda/Perisai SVG -->
+                    <svg class="w-7 h-7 text-red-700" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L3 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-9-3zm0 4.5l1.45 2.94 3.25.47-2.35 2.29.55 3.23L12 13.9l-2.9 1.53.55-3.23-2.35-2.29 3.25-.47L12 6.5z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold leading-tight tracking-wide">JEJAK PANCASILA</h1>
+                    <p class="text-xs text-amber-200 font-semibold">Pendidikan Pancasila • Kelas 5 SD/MI</p>
+                </div>
+            </div>
+
+            <!-- Kontrol Audio & Papan Peringkat -->
+            <div class="flex items-center gap-2">
+                <button onclick="openLeaderboardModal()" class="btn-cartoon bg-amber-400 hover:bg-amber-300 text-red-900 font-bold px-3 py-1.5 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 border-2 border-amber-600">
+                    <span>🏆</span> <span class="hidden sm:inline">Peringkat</span>
+                </button>
+                <button id="btn-music" onclick="toggleMusic()" title="Musik Latar" class="btn-cartoon bg-white hover:bg-slate-100 text-red-600 font-bold p-2 rounded-xl border-2 border-red-800 text-sm">
+                    🎵 <span id="music-status" class="text-xs hidden md:inline">Musik: ON</span>
+                </button>
+                <button id="btn-sfx" onclick="toggleSfx()" title="Efek Suara" class="btn-cartoon bg-white hover:bg-slate-100 text-red-600 font-bold p-2 rounded-xl border-2 border-red-800 text-sm">
+                    🔊 <span id="sfx-status" class="text-xs hidden md:inline">Suara: ON</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Kontainer Utama -->
+    <main class="flex-grow flex items-center justify-center p-3 sm:p-6">
+        <div class="w-full max-w-4xl">
+
+            <!-- =========================================================
+                 1. HALAMAN AWAL (START SCREEN)
+                 ========================================================= -->
+            <section id="screen-start" class="bg-white rounded-3xl shadow-2xl border-4 border-red-600 overflow-hidden animate-pop">
+                <!-- Banner Atas -->
+                <div class="bg-gradient-to-r from-red-600 via-red-500 to-amber-500 p-6 sm:p-8 text-center text-white relative">
+                    <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full text-xs sm:text-sm font-bold mb-3 border border-white/40">
+                        📚 Semester 1 (Ganjil) • Kurikulum Merdeka
+                    </div>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold drop-shadow-md mb-2">
+                        Petualangan Sejarah Lahirnya Pancasila
+                    </h2>
+                    <p class="text-amber-100 text-sm sm:text-base max-w-xl mx-auto font-semibold">
+                        Ayo uji pemahamanmu tentang detik-detik bersejarah perumusan dasar negara Indonesia melalui tantangan seru Drag & Drop!
+                    </p>
+                </div>
+
+                <!-- Isi Halaman Awal -->
+                <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <!-- Kolom Kiri: Karakter Maskot SVG & Identitas Guru -->
+                    <div class="md:col-span-5 flex flex-col items-center text-center bg-amber-50 p-5 rounded-2xl border-2 border-amber-300">
+                        <!-- Karakter Maskot Siswa SD SVG -->
+                        <div class="w-36 h-36 sm:w-44 sm:h-44 animate-float mb-3">
+                            <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                                <!-- Latar Lingkaran -->
+                                <circle cx="100" cy="100" r="90" fill="#FDE68A" stroke="#F59E0B" stroke-width="4"/>
+                                <!-- Badan Seragam Merah Putih -->
+                                <path d="M50 185 C50 140, 150 140, 150 185 Z" fill="#DC2626"/>
+                                <path d="M75 142 L100 175 L125 142 Z" fill="#FFFFFF"/>
+                                <!-- Dasi Merah -->
+                                <polygon points="95,142 105,142 103,165 100,170 97,165" fill="#B91C1C"/>
+                                <!-- Leher & Kepala -->
+                                <rect x="88" y="120" width="24" height="25" rx="8" fill="#FDBA74"/>
+                                <circle cx="100" cy="92" r="42" fill="#FED7AA"/>
+                                <!-- Rambut -->
+                                <path d="M58 88 C58 45, 142 45, 142 88 C135 65, 65 65, 58 88 Z" fill="#1E293B"/>
+                                <!-- Peci Hitam Nasional -->
+                                <path d="M66 64 C66 42, 134 42, 134 64 L130 72 L70 72 Z" fill="#0F172A"/>
+                                <rect x="70" y="67" width="60" height="4" fill="#F59E0B"/>
+                                <!-- Mata & Ekspresi Ceria -->
+                                <circle cx="85" cy="92" r="5" fill="#1E293B"/>
+                                <circle cx="115" cy="92" r="5" fill="#1E293B"/>
+                                <circle cx="87" cy="90" r="1.5" fill="#FFFFFF"/>
+                                <circle cx="117" cy="90" r="1.5" fill="#FFFFFF"/>
+                                <!-- Pipi Merona -->
+                                <ellipse cx="75" cy="102" rx="6" ry="3.5" fill="#FCA5A5"/>
+                                <ellipse cx="125" cy="102" rx="6" ry="3.5" fill="#FCA5A5"/>
+                                <!-- Senyum -->
+                                <path d="M88 106 Q100 118 112 106" stroke="#991B1B" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                                <!-- Bendera Merah Putih Kecil di Tangan -->
+                                <rect x="148" y="105" width="4" height="65" rx="2" fill="#78350F"/>
+                                <rect x="152" y="107" width="32" height="11" fill="#EF4444"/>
+                                <rect x="152" y="118" width="32" height="11" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="0.5"/>
+                            </svg>
+                        </div>
+
+                        <div class="bg-white px-4 py-2.5 rounded-xl border border-amber-200 w-full shadow-sm">
+                            <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Guru Penyusun</p>
+                            <p class="text-base font-extrabold text-red-700">Wahyono, S.Pd.SD</p>
+                            <p class="text-xs font-semibold text-slate-600 mt-0.5">Jenjang SD/MI • Kelas 5</p>
+                        </div>
+                    </div>
+
+                    <!-- Kolom Kanan: Input Nama, Petunjuk & Tombol Aksi -->
+                    <div class="md:col-span-7 flex flex-col justify-between space-y-4">
+                        <!-- Form Nama Pemain -->
+                        <div class="bg-blue-50 p-4 rounded-2xl border-2 border-blue-200">
+                            <label for="player-name" class="block text-sm font-extrabold text-blue-900 mb-1.5">
+                                ✏️ Masukkan Nama Lengkapmu Sebelum Bermain:
+                            </label>
+                            <input type="text" id="player-name" maxlength="25" placeholder="Contoh: Budi Santoso" 
+                                class="w-full px-4 py-2.5 rounded-xl border-2 border-blue-300 focus:border-blue-600 focus:outline-none font-bold text-slate-800 bg-white text-base">
+                            <p id="name-error" class="text-red-600 text-xs font-bold mt-1 hidden">⚠️ Silakan tulis namamu terlebih dahulu ya!</p>
+                        </div>
+
+                        <!-- Cara Bermain Singkat -->
+                        <div class="bg-slate-50 p-4 rounded-2xl border-2 border-slate-200 space-y-2">
+                            <h3 class="font-extrabold text-slate-800 text-base flex items-center gap-2">
+                                <span>🎮</span> Cara Bermain:
+                            </h3>
+                            <ul class="text-xs sm:text-sm text-slate-700 space-y-1.5 font-semibold">
+                                <li class="flex items-start gap-2">
+                                    <span class="bg-red-100 text-red-700 font-extrabold px-1.5 rounded">1</span>
+                                    <span>Terdapat <strong>10 Tantangan</strong> seputar Sejarah Lahirnya Pancasila.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="bg-amber-100 text-amber-800 font-extrabold px-1.5 rounded">2</span>
+                                    <span><strong>Seret & Lepas (Drag & Drop)</strong> kartu jawaban ke kotak kosong yang tepat (bisa juga klik kartu lalu klik kotak tujuan).</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="bg-emerald-100 text-emerald-800 font-extrabold px-1.5 rounded">3</span>
+                                    <span>Kamu memiliki <strong>3 Nyawa ❤️</strong> dan waktu <strong>10 Menit</strong>. Raih skor maksimal 100!</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Tombol Aksi -->
+                        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                            <button onclick="openMaterialModal()" class="btn-cartoon flex-1 bg-amber-400 hover:bg-amber-300 text-amber-950 font-extrabold py-3.5 px-4 rounded-2xl border-2 border-amber-600 text-sm sm:text-base flex items-center justify-center gap-2">
+                                <span>📖</span> Ringkasan Materi
+                            </button>
+                            <button onclick="startGame()" class="btn-cartoon flex-[1.5] bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold py-3.5 px-6 rounded-2xl border-2 border-emerald-700 text-base sm:text-lg flex items-center justify-center gap-2 shadow-lg">
+                                <span>🚀</span> MULAI BERMAIN
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================================================
+                 2. HALAMAN PERMAINAN UTAMA (GAMEPLAY SCREEN)
+                 ========================================================= -->
+            <section id="screen-game" class="hidden space-y-4">
+                <!-- HUD (Heads-Up Display): Nyawa, Progres, Skor, Timer -->
+                <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-md border-4 border-amber-400 flex flex-wrap items-center justify-between gap-3">
+                    <!-- Info Pemain & Nyawa -->
+                    <div class="flex items-center gap-3">
+                        <div class="bg-red-100 text-red-700 font-extrabold px-3 py-1.5 rounded-xl text-xs sm:text-sm border border-red-200">
+                            👤 <span id="hud-name">Siswa</span>
+                        </div>
+                        <div class="flex items-center gap-1 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-200" title="Kesempatan Bermain">
+                            <span id="hud-lives" class="text-base sm:text-lg tracking-widest">❤️❤️❤️</span>
+                        </div>
+                    </div>
+
+                    <!-- Indikator Soal -->
+                    <div class="bg-blue-600 text-white font-extrabold px-4 py-1.5 rounded-xl text-xs sm:text-sm shadow-inner">
+                        Soal <span id="hud-q-num">1</span> / 10
+                    </div>
+
+                    <!-- Skor & Timer -->
+                    <div class="flex items-center gap-2 sm:gap-3">
+                        <div class="bg-emerald-100 text-emerald-800 font-extrabold px-3 py-1.5 rounded-xl text-xs sm:text-sm border border-emerald-300">
+                            ⭐ Skor: <span id="hud-score">0</span>
+                        </div>
+                        <div id="timer-box" class="bg-amber-100 text-amber-900 font-extrabold px-3 py-1.5 rounded-xl text-xs sm:text-sm border border-amber-300 font-mono">
+                            ⏱️ <span id="hud-timer">10:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Area Kartu Soal & Interaksi Drag & Drop -->
+                <div id="question-container" class="bg-white rounded-3xl p-5 sm:p-7 shadow-xl border-4 border-red-500 animate-pop">
+                    <!-- Kategori & Instruksi Soal -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                        <span id="q-badge" class="bg-red-100 text-red-700 font-extrabold px-3 py-1 rounded-full text-xs uppercase tracking-wide border border-red-200">
+                            Sejarah BPUPKI
+                        </span>
+                        <span class="text-xs font-bold text-slate-500">
+                            💡 Seret kartu ke kotak jawaban yang sesuai
+                        </span>
+                    </div>
+
+                    <!-- Teks Pertanyaan -->
+                    <h3 id="q-text" class="text-lg sm:text-xl font-extrabold text-slate-800 leading-relaxed mb-5">
+                        Memuat pertanyaan...
+                    </h3>
+
+                    <!-- Area Konten Dinamis (Zona Drop & Pilihan Kartu Drag) -->
+                    <div id="interactive-area" class="space-y-6">
+                        <!-- Diisi otomatis oleh JavaScript -->
+                    </div>
+
+                    <!-- Tombol Cek Jawaban & Reset Pilihan -->
+                    <div class="mt-6 pt-4 border-t-2 border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                        <button onclick="resetCurrentQuestion()" class="btn-cartoon bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-4 py-2.5 rounded-xl text-sm border-2 border-slate-400">
+                            🔄 Ulangi Susunan
+                        </button>
+                        <button id="btn-check-answer" onclick="checkAnswer()" disabled class="btn-cartoon bg-emerald-500 disabled:bg-slate-300 disabled:text-slate-500 disabled:border-slate-400 hover:bg-emerald-400 text-white font-extrabold px-6 py-3 rounded-xl text-base border-2 border-emerald-700">
+                            ✅ Periksa Jawaban
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================================================
+                 3. HALAMAN HASIL AKHIR & EVALUASI (RESULT SCREEN)
+                 ========================================================= -->
+            <section id="screen-result" class="hidden bg-white rounded-3xl shadow-2xl border-4 border-amber-500 overflow-hidden animate-pop">
+                <div id="result-header" class="bg-gradient-to-r from-emerald-500 to-teal-600 p-6 sm:p-8 text-center text-white">
+                    <div id="result-emoji" class="text-5xl sm:text-6xl mb-2 animate-bounce">🏆</div>
+                    <h2 id="result-title" class="text-2xl sm:text-3xl font-extrabold">Luar Biasa, Pahlawan Muda!</h2>
+                    <p id="result-subtitle" class="text-emerald-100 font-semibold text-sm sm:text-base mt-1">
+                        Kamu telah menyelesaikan petualangan Sejarah Lahirnya Pancasila.
+                    </p>
+                </div>
+
+                <div class="p-6 sm:p-8 space-y-6">
+                    <!-- Ringkasan Statistik Nilai -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                        <div class="bg-amber-50 p-3.5 rounded-2xl border-2 border-amber-300">
+                            <p class="text-xs font-bold text-amber-800 uppercase">Skor Akhir</p>
+                            <p id="res-score" class="text-3xl font-extrabold text-amber-600 mt-1">100</p>
+                        </div>
+                        <div class="bg-emerald-50 p-3.5 rounded-2xl border-2 border-emerald-300">
+                            <p class="text-xs font-bold text-emerald-800 uppercase">Jawaban Benar</p>
+                            <p id="res-correct" class="text-3xl font-extrabold text-emerald-600 mt-1">10/10</p>
+                        </div>
+                        <div class="bg-blue-50 p-3.5 rounded-2xl border-2 border-blue-300">
+                            <p class="text-xs font-bold text-blue-800 uppercase">Sisa Waktu</p>
+                            <p id="res-time" class="text-2xl sm:text-3xl font-extrabold text-blue-600 mt-1">05:20</p>
+                        </div>
+                        <div class="bg-purple-50 p-3.5 rounded-2xl border-2 border-purple-300">
+                            <p class="text-xs font-bold text-purple-800 uppercase">Predikat</p>
+                            <p id="res-grade" class="text-lg sm:text-xl font-extrabold text-purple-700 mt-2">Sangat Baik</p>
+                        </div>
+                    </div>
+
+                    <!-- Pesan Evaluasi Pedagogis -->
+                    <div class="bg-slate-50 p-4 rounded-2xl border-2 border-slate-200">
+                        <h3 class="font-extrabold text-slate-800 text-base mb-1">📋 Evaluasi Belajar:</h3>
+                        <p id="res-evaluation" class="text-sm text-slate-700 leading-relaxed font-semibold">
+                            Selamat! Pemahamanmu tentang sejarah perumusan Pancasila sangat baik.
+                        </p>
+                    </div>
+
+                    <!-- Tombol Navigasi Akhir -->
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                        <button onclick="openLeaderboardModal()" class="btn-cartoon bg-amber-400 hover:bg-amber-300 text-amber-950 font-extrabold py-3.5 px-6 rounded-2xl border-2 border-amber-600 text-base flex items-center justify-center gap-2">
+                            <span>🏆</span> Lihat Papan Peringkat
+                        </button>
+                        <button onclick="resetToStart()" class="btn-cartoon bg-red-600 hover:bg-red-500 text-white font-extrabold py-3.5 px-8 rounded-2xl border-2 border-red-800 text-base flex items-center justify-center gap-2">
+                            <span>🔄</span> MAIN LAGI
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- =========================================================
+         MODAL UMPAN BALIK & PEMBAHASAN EDUKATIF
+         ========================================================= -->
+    <div id="feedback-modal" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border-4 border-slate-800 animate-pop">
+            <div id="fb-header" class="p-5 text-center text-white bg-emerald-500">
+                <div id="fb-icon" class="text-5xl mb-1">🎉</div>
+                <h3 id="fb-title" class="text-2xl font-extrabold">Jawaban Benar!</h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200">
+                    <p class="text-xs font-extrabold text-amber-800 uppercase mb-1">💡 Pembahasan Edukatif:</p>
+                    <p id="fb-explanation" class="text-sm sm:text-base text-slate-800 font-semibold leading-relaxed">
+                        Penjelasan materi muncul di sini.
+                    </p>
+                </div>
+                <button onclick="nextQuestion()" class="btn-cartoon w-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold py-3.5 rounded-2xl border-2 border-blue-800 text-base">
+                    Lanjut ke Soal Berikutnya ➡️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL RINGKASAN MATERI PEMBELAJARAN
+         ========================================================= -->
+    <div id="material-modal" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl border-4 border-amber-500 animate-pop">
+            <div class="bg-amber-400 p-4 sm:p-5 flex items-center justify-between border-b-4 border-amber-500">
+                <h3 class="text-lg sm:text-xl font-extrabold text-amber-950 flex items-center gap-2">
+                    <span>📖</span> Ringkasan Materi: Sejarah Lahirnya Pancasila
+                </h3>
+                <button onclick="closeMaterialModal()" class="bg-white hover:bg-red-100 text-red-600 font-extrabold w-9 h-9 rounded-full border-2 border-amber-600">✕</button>
+            </div>
+            <div class="p-5 sm:p-6 overflow-y-auto space-y-4 text-sm sm:text-base text-slate-700 leading-relaxed">
+                <div class="bg-red-50 p-4 rounded-2xl border border-red-200">
+                    <h4 class="font-extrabold text-red-800 mb-1">1. Pembentukan BPUPKI (1 Maret 1945)</h4>
+                    <p>Menjelang akhir Perang Dunia II, Jepang membentuk <strong>BPUPKI</strong> (Badan Penyelidik Usaha-Usaha Persiapan Kemerdekaan Indonesia) atau <em>Dokuritsu Junbi Cosakai</em>. Ketuanya adalah <strong>Dr. K.R.T. Radjiman Wedyodiningrat</strong>.</p>
+                </div>
+                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
+                    <h4 class="font-extrabold text-amber-900 mb-1">2. Sidang Pertama BPUPKI (29 Mei – 1 Juni 1945)</h4>
+                    <p>Membahas rumusan dasar negara Indonesia merdeka. Tiga tokoh utama menyampaikan usulannya:</p>
+                    <ul class="list-disc pl-5 mt-1 space-y-1 font-semibold">
+                        <li><strong>Moh. Yamin (29 Mei 1945):</strong> Mengusulkan 5 asas secara lisan dan tertulis.</li>
+                        <li><strong>Prof. Dr. Soepomo (31 Mei 1945):</strong> Mengusulkan dasar negara dengan paham integralistik/persatuan.</li>
+                        <li><strong>Ir. Soekarno (1 Juni 1945):</strong> Menyampaikan 5 dasar negara dan menamainya <strong>"Pancasila"</strong> (Panca = lima, Sila = dasar). Oleh karena itu, <strong>1 Juni</strong> diperingati sebagai <strong>Hari Lahir Pancasila</strong>.</li>
+                    </ul>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200">
+                    <h4 class="font-extrabold text-blue-900 mb-1">3. Panitia Sembilan & Piagam Jakarta (22 Juni 1945)</h4>
+                    <p>Untuk menyempurnakan rumusan dasar negara, dibentuk <strong>Panitia Sembilan</strong> yang diketuai Ir. Soekarno. Mereka menghasilkan rumusan yang disebut <strong>Piagam Jakarta</strong> (<em>Jakarta Charter</em>).</p>
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+                    <h4 class="font-extrabold text-emerald-900 mb-1">4. Pengesahan Pancasila oleh PPKI (18 Agustus 1945)</h4>
+                    <p>Sehari setelah Proklamasi Kemerdekaan, <strong>PPKI</strong> mengesahkan UUD 1945. Demi menjaga persatuan bangsa Indonesia yang beragam, kalimat pada sila pertama Piagam Jakarta diubah menjadi <strong>"Ketuhanan Yang Maha Esa"</strong>. Inilah rumusan final Pancasila yang sah.</p>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-200 text-right">
+                <button onclick="closeMaterialModal()" class="btn-cartoon bg-red-600 text-white font-extrabold px-6 py-2.5 rounded-xl border-2 border-red-800">
+                    Siap Bermain! 👍
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL PAPAN PERINGKAT LOKAL (LEADERBOARD)
+         ========================================================= -->
+    <div id="leaderboard-modal" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border-4 border-amber-500 animate-pop">
+            <div class="bg-amber-400 p-4 flex items-center justify-between border-b-4 border-amber-500">
+                <h3 class="text-lg font-extrabold text-amber-950 flex items-center gap-2">
+                    <span>🏆</span> Papan Peringkat Kelas 5
+                </h3>
+                <button onclick="closeLeaderboardModal()" class="bg-white hover:bg-red-100 text-red-600 font-extrabold w-8 h-8 rounded-full border-2 border-amber-600">✕</button>
+            </div>
+            <div class="p-5">
+                <div id="leaderboard-list" class="space-y-2.5 max-h-72 overflow-y-auto">
+                    <!-- Diisi oleh JS -->
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center">
+                <button onclick="clearLeaderboard()" class="text-xs font-bold text-red-600 hover:underline">Hapus Riwayat</button>
+                <button onclick="closeLeaderboardModal()" class="btn-cartoon bg-blue-600 text-white font-bold px-5 py-2 rounded-xl border-2 border-blue-800 text-sm">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-3 px-4 text-xs font-bold text-amber-950/80">
+        Media Pembelajaran Interaktif Pendidikan Pancasila Kelas 5 SD/MI • Disusun oleh Wahyono, S.Pd.SD
+    </footer>
+
+    <!-- =========================================================
+         JAVASCRIPT LOGIKA PERMAINAN & WEB AUDIO API
+         ========================================================= -->
+    <script>
+        /* -----------------------------------------------------------
+           1. SISTEM AUDIO MANDIRI (WEB AUDIO API - TANPA FILE EKSTERNAL)
+           ----------------------------------------------------------- */
+        const AudioEngine = {
+            ctx: null,
+            musicEnabled: true,
+            sfxEnabled: true,
+            bgmInterval: null,
+            step: 0,
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioContext();
+                }
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+
+            playTone(freq, type, duration, vol = 0.1) {
+                if (!this.sfxEnabled) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                gain.gain.setValueAtTime(vol, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + duration);
+            },
+
+            sfxDrop() {
+                this.playTone(520, 'sine', 0.12, 0.12);
+            },
+
+            sfxCorrect() {
+                this.playTone(523.25, 'triangle', 0.15, 0.15); // C5
+                setTimeout(() => this.playTone(659.25, 'triangle', 0.15, 0.15), 100); // E5
+                setTimeout(() => this.playTone(783.99, 'triangle', 0.3, 0.15), 200); // G5
+            },
+
+            sfxWrong() {
+                this.playTone(220, 'sawtooth', 0.2, 0.12);
+                setTimeout(() => this.playTone(180, 'sawtooth', 0.3, 0.12), 150);
+            },
+
+            sfxWin() {
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((n, i) => {
+                    setTimeout(() => this.playTone(n, 'triangle', 0.25, 0.15), i * 130);
+                });
+            },
+
+            startBgm() {
+                if (this.bgmInterval) return;
+                // Melodi ceria pentatonik anak-anak
+                const melody = [261.63, 329.63, 392.00, 329.63, 293.66, 349.23, 440.00, 392.00];
+                this.bgmInterval = setInterval(() => {
+                    if (!this.musicEnabled) return;
+                    if (!this.ctx || this.ctx.state !== 'running') return;
+                    const note = melody[this.step % melody.length];
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(note, this.ctx.currentTime);
+                    gain.gain.setValueAtTime(0.03, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0005, this.ctx.currentTime + 0.35);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.38);
+                    this.step++;
+                }, 450);
+            }
+        };
+
+        function toggleMusic() {
+            AudioEngine.init();
+            AudioEngine.musicEnabled = !AudioEngine.musicEnabled;
+            const status = document.getElementById('music-status');
+            const btn = document.getElementById('btn-music');
+            if (AudioEngine.musicEnabled) {
+                status.textContent = 'Musik: ON';
+                btn.classList.remove('opacity-60');
+                AudioEngine.startBgm();
+            } else {
+                status.textContent = 'Musik: OFF';
+                btn.classList.add('opacity-60');
+            }
+        }
+
+        function toggleSfx() {
+            AudioEngine.init();
+            AudioEngine.sfxEnabled = !AudioEngine.sfxEnabled;
+            const status = document.getElementById('sfx-status');
+            const btn = document.getElementById('btn-sfx');
+            if (AudioEngine.sfxEnabled) {
+                status.textContent = 'Suara: ON';
+                btn.classList.remove('opacity-60');
+                AudioEngine.sfxDrop();
+            } else {
+                status.textContent = 'Suara: OFF';
+                btn.classList.add('opacity-60');
+            }
+        }
+
+        /* -----------------------------------------------------------
+           2. BANK SOAL AKADEMIS (10 SOAL SEJARAH LAHIRNYA PANCASILA)
+           Tipe Soal:
+           - 'single': Melengkapi kalimat/pernyataan dengan 1 kotak drop
+           - 'match': Mencocokkan 3 pasangan tokoh/peristiwa dengan 3 kotak drop
+           ----------------------------------------------------------- */
+        const questionsData = [
+            {
+                id: 1,
+                category: "Pembentukan BPUPKI",
+                type: "single",
+                question: "Untuk mempersiapkan kemerdekaan Indonesia, dibentuklah BPUPKI pada tanggal 1 Maret 1945 yang diketuai oleh tokoh bernama...",
+                promptBefore: "Ketua BPUPKI adalah",
+                promptAfter: "yang memimpin jalannya sidang perumusan dasar negara.",
+                answer: "Dr. K.R.T. Radjiman Wedyodiningrat",
+                options: [
+                    "Dr. K.R.T. Radjiman Wedyodiningrat",
+                    "Ir. Soekarno",
+                    "Drs. Moh. Hatta",
+                    "Mr. Ahmad Soebardjo"
+                ],
+                explanation: "Dr. K.R.T. Radjiman Wedyodiningrat ditunjuk sebagai Ketua BPUPKI (Dokuritsu Junbi Cosakai), sedangkan wakilnya adalah Ichibangase Yosio dan R.P. Soeroso."
+            },
+            {
+                id: 2,
+                category: "Tokoh Perumus Dasar Negara",
+                type: "match",
+                question: "Pasangkan nama tokoh perumus dasar negara di bawah ini dengan tanggal penyampaian usulannya pada Sidang Pertama BPUPKI!",
+                slots: [
+                    { id: "s1", label: "📅 29 Mei 1945", answer: "Mr. Mohammad Yamin" },
+                    { id: "s2", label: "📅 31 Mei 1945", answer: "Prof. Dr. Soepomo" },
+                    { id: "s3", label: "📅 1 Juni 1945", answer: "Ir. Soekarno" }
+                ],
+                options: [
+                    "Ir. Soekarno",
+                    "Mr. Mohammad Yamin",
+                    "Prof. Dr. Soepomo"
+                ],
+                explanation: "Sidang pertama BPUPKI berlangsung 29 Mei – 1 Juni 1945. Secara berurutan, tokoh yang menyampaikan usulan dasar negara adalah Moh. Yamin (29 Mei), Soepomo (31 Mei), dan Ir. Soekarno (1 Juni)."
+            },
+            {
+                id: 3,
+                category: "Hari Lahir Pancasila",
+                type: "single",
+                question: "Pada tanggal 1 Juni 1945, Ir. Soekarno menyampaikan pidato mengenai lima dasar negara Indonesia merdeka dan menamainya...",
+                promptBefore: "Lima dasar negara tersebut diberi nama",
+                promptAfter: "atas saran seorang ahli bahasa.",
+                answer: "Pancasila",
+                options: [
+                    "Pancasila",
+                    "Trisila",
+                    "Ekasila",
+                    "Dasa Dharma"
+                ],
+                explanation: "Dalam pidatonya pada 1 Juni 1945, Ir. Soekarno mengusulkan nama 'Pancasila' (Panca artinya lima, Sila artinya dasar). Tanggal 1 Juni kemudian diperingati sebagai Hari Lahir Pancasila."
+            },
+            {
+                id: 4,
+                category: "Panitia Sembilan",
+                type: "single",
+                question: "Setelah sidang pertama BPUPKI selesai, dibentuk panitia kecil beranggotakan sembilan tokoh yang bertugas merumuskan dasar negara. Panitia ini disebut...",
+                promptBefore: "Panitia yang diketuai oleh Ir. Soekarno tersebut dikenal sebagai",
+                promptAfter: "dan berhasil menyusun Piagam Jakarta.",
+                answer: "Panitia Sembilan",
+                options: [
+                    "Panitia Sembilan",
+                    "Panitia Delapan",
+                    "Panitia Persiapan",
+                    "Panitia Perancang UUD"
+                ],
+                explanation: "Panitia Sembilan dibentuk untuk menampung dan menyelaraskan berbagai usulan rumusan dasar negara dari para anggota BPUPKI."
+            },
+            {
+                id: 5,
+                category: "Piagam Jakarta",
+                type: "single",
+                question: "Hasil kerja Panitia Sembilan pada tanggal 22 Juni 1945 melahirkan sebuah rancangan pembukaan hukum dasar yang diberi nama...",
+                promptBefore: "Dokumen bersejarah tanggal 22 Juni 1945 tersebut bernama",
+                promptAfter: "(Jakarta Charter).",
+                answer: "Piagam Jakarta",
+                options: [
+                    "Piagam Jakarta",
+                    "Sumpah Pemuda",
+                    "Teks Proklamasi",
+                    "Dekrit Presiden"
+                ],
+                explanation: "Piagam Jakarta atau Jakarta Charter dirumuskan oleh Panitia Sembilan pada 22 Juni 1945 dan memuat rumusan awal sila-sila Pancasila."
+            },
+            {
+                id: 6,
+                category: "Pengesahan Pancasila",
+                type: "match",
+                question: "Cocokkan peristiwa penting dalam sejarah kemerdekaan dan lahirnya Pancasila berikut dengan tanggal terjadinya yang tepat!",
+                slots: [
+                    { id: "s1", label: "📜 Lahirnya Piagam Jakarta", answer: "22 Juni 1945" },
+                    { id: "s2", label: "🇮🇩 Proklamasi Kemerdekaan RI", answer: "17 Agustus 1945" },
+                    { id: "s3", label: "⚖️ Pengesahan Pancasila oleh PPKI", answer: "18 Agustus 1945" }
+                ],
+                options: [
+                    "18 Agustus 1945",
+                    "22 Juni 1945",
+                    "17 Agustus 1945"
+                ],
+                explanation: "Piagam Jakarta lahir pada 22 Juni 1945, Proklamasi Kemerdekaan pada 17 Agustus 1945, dan keesokan harinya pada 18 Agustus 1945 PPKI mengesahkan UUD 1945 beserta Pancasila."
+            },
+            {
+                id: 7,
+                category: "Semangat Persatuan Bangsa",
+                type: "single",
+                question: "Pada sidang PPKI tanggal 18 Agustus 1945, demi menjaga persatuan bangsa Indonesia yang beragam, rumusan sila pertama dalam Piagam Jakarta disepakati menjadi...",
+                promptBefore: "Bunyi sila pertama Pancasila yang sah adalah",
+                promptAfter: "sebagai wujud toleransi para pendiri bangsa.",
+                answer: "Ketuhanan Yang Maha Esa",
+                options: [
+                    "Ketuhanan Yang Maha Esa",
+                    "Ketuhanan Yang Berkebudayaan",
+                    "Persatuan Indonesia",
+                    "Kemanusiaan yang Adil dan Beradab"
+                ],
+                explanation: "Para pendiri bangsa menunjukkan sikap lapang dada dan mengutamakan persatuan dengan menyepakati perubahan sila pertama menjadi 'Ketuhanan Yang Maha Esa'."
+            },
+            {
+                id: 8,
+                category: "Teladan Pendiri Bangsa",
+                type: "match",
+                question: "Pasangkan sikap teladan para tokoh perumus Pancasila berikut dengan makna nilai yang terkandung di dalamnya!",
+                slots: [
+                    { id: "s1", label: "🤝 Menerima perubahan sila pertama", answer: "Mengutamakan persatuan bangsa" },
+                    { id: "s2", label: "🗣️ Berdiskusi dalam sidang BPUPKI", answer: "Musyawarah mufakat" },
+                    { id: "s3", label: "🇮🇩 Merumuskan dasar negara merdeka", answer: "Cinta tanah air (Nasionalisme)" }
+                ],
+                options: [
+                    "Musyawarah mufakat",
+                    "Cinta tanah air (Nasionalisme)",
+                    "Mengutamakan persatuan bangsa"
+                ],
+                explanation: "Para tokoh perumus Pancasila meneladankan nilai nasionalisme, musyawarah untuk mufakat, serta rela berkorban demi keutuhan Negara Kesatuan Republik Indonesia."
+            },
+            {
+                id: 9,
+                category: "Penerapan Sehari-hari",
+                type: "single",
+                question: "Di kelas 5, siswa bermusyawarah memilih ketua kelas. Andi mengusulkan temannya, namun suara terbanyak memilih Siti. Sikap Andi yang meneladani perumus Pancasila adalah...",
+                promptBefore: "Andi sebaiknya bersikap",
+                promptAfter: "dan mendukung Siti sebagai ketua kelas terpilih.",
+                answer: "Menerima hasil musyawarah dengan lapang dada",
+                options: [
+                    "Menerima hasil musyawarah dengan lapang dada",
+                    "Memprotes hasil pemilihan karena tidak sesuai keinginan",
+                    "Meninggalkan ruang kelas dengan marah",
+                    "Tidak mau bekerja sama dengan ketua kelas"
+                ],
+                explanation: "Menghargai perbedaan pendapat dan menerima keputusan bersama dengan lapang dada adalah penerapan nyata semangat para pendiri bangsa dalam kehidupan sehari-hari."
+            },
+            {
+                id: 10,
+                category: "Makna Pancasila",
+                type: "single",
+                question: "Pancasila merupakan hasil kesepakatan luhur para pendiri bangsa yang berkedudukan sebagai dasar negara serta...",
+                promptBefore: "Pancasila menjadi",
+                promptAfter: "bagi seluruh rakyat Indonesia dalam kehidupan berbangsa dan bernegara.",
+                answer: "Pandangan hidup bangsa",
+                options: [
+                    "Pandangan hidup bangsa",
+                    "Peraturan daerah sementara",
+                    "Lagu kebangsaan negara",
+                    "Simbol kerajaan nusantara"
+                ],
+                explanation: "Selain sebagai dasar negara, Pancasila adalah pandangan hidup bangsa Indonesia yang menjadi pedoman sikap dan perilaku kita setiap hari."
+            }
+        ];
+
+        /* -----------------------------------------------------------
+           3. STATE PERMAINAN
+           ----------------------------------------------------------- */
+        let gameState = {
+            playerName: "",
+            currentIndex: 0,
+            score: 0,
+            correctCount: 0,
+            lives: 3,
+            timeRemaining: 600, // 10 menit = 600 detik
+            timerInterval: null,
+            userPlacements: {}, // { slotId: optionText }
+            selectedTapOption: null, // Untuk mode klik/tap alternatif drag
+            isQuestionAnswered: false
+        };
+
+        /* -----------------------------------------------------------
+           4. FUNGSI NAVIGASI & KONTROL ALUR GAME
+           ----------------------------------------------------------- */
+        function startGame() {
+            const nameInput = document.getElementById('player-name').value.trim();
+            const nameError = document.getElementById('name-error');
+
+            if (!nameInput) {
+                nameError.classList.remove('hidden');
+                document.getElementById('player-name').focus();
+                AudioEngine.sfxWrong();
+                return;
+            }
+            nameError.classList.add('hidden');
+
+            // Inisialisasi Audio & Musik Latar
+            AudioEngine.init();
+            AudioEngine.startBgm();
+
+            // Reset State
+            gameState = {
+                playerName: nameInput,
+                currentIndex: 0,
+                score: 0,
+                correctCount: 0,
+                lives: 3,
+                timeRemaining: 600,
+                timerInterval: null,
+                userPlacements: {},
+                selectedTapOption: null,
+                isQuestionAnswered: false
+            };
+
+            // Update HUD
+            document.getElementById('hud-name').textContent = gameState.playerName;
+            updateHud();
+
+            // Pindah Layar
+            document.getElementById('screen-start').classList.add('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+
+            // Mulai Timer
+            startTimer();
+            renderQuestion();
+        }
+
+        function startTimer() {
+            clearInterval(gameState.timerInterval);
+            gameState.timerInterval = setInterval(() => {
+                gameState.timeRemaining--;
+                updateTimerDisplay();
+
+                if (gameState.timeRemaining <= 0) {
+                    clearInterval(gameState.timerInterval);
+                    endGame("Waktu Habis!");
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(gameState.timeRemaining / 60);
+            const secs = gameState.timeRemaining % 60;
+            const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            document.getElementById('hud-timer').textContent = formatted;
+
+            const timerBox = document.getElementById('timer-box');
+            if (gameState.timeRemaining <= 60) {
+                timerBox.classList.replace('bg-amber-100', 'bg-red-100');
+                timerBox.classList.replace('text-amber-900', 'text-red-700');
+            }
+        }
+
+        function updateHud() {
+            document.getElementById('hud-q-num').textContent = gameState.currentIndex + 1;
+            document.getElementById('hud-score').textContent = gameState.score;
+            const hearts = "❤️".repeat(gameState.lives) + "🖤".repeat(3 - gameState.lives);
+            document.getElementById('hud-lives').textContent = hearts;
+        }
+
+        /* -----------------------------------------------------------
+           5. RENDER SOAL & MEKANIK DRAG AND DROP (MOUSE + TOUCH + TAP)
+           ----------------------------------------------------------- */
+        function renderQuestion() {
+            const q = questionsData[gameState.currentIndex];
+            gameState.userPlacements = {};
+            gameState.selectedTapOption = null;
+            gameState.isQuestionAnswered = false;
+
+            // Animasi ulang kartu soal
+            const qContainer = document.getElementById('question-container');
+            qContainer.classList.remove('animate-pop');
+            void qContainer.offsetWidth;
+            qContainer.classList.add('animate-pop');
+
+            document.getElementById('q-badge').textContent = `Topik: ${q.category}`;
+            document.getElementById('q-text').textContent = `${gameState.currentIndex + 1}. ${q.question}`;
+            document.getElementById('btn-check-answer').disabled = true;
+
+            const interactiveArea = document.getElementById('interactive-area');
+            interactiveArea.innerHTML = '';
+
+            // A. Render Zona Drop sesuai tipe soal
+            const dropContainer = document.createElement('div');
+            if (q.type === 'single') {
+                dropContainer.className = "bg-blue-50/80 p-5 rounded-2xl border-2 border-blue-200 flex flex-wrap items-center justify-center gap-3 text-base sm:text-lg font-bold text-slate-800 text-center";
+                dropContainer.innerHTML = `
+                    <span>${q.promptBefore}</span>
+                    <div id="drop-slot-main" data-slot-id="main" onclick="handleSlotTap('main')"
+                         class="drop-zone min-w-[220px] sm:min-w-[260px] min-h-[52px] px-4 py-2 rounded-xl bg-white flex items-center justify-center text-slate-400 text-sm sm:text-base font-extrabold cursor-pointer">
+                        [ Taruh Jawaban di Sini ]
+                    </div>
+                    <span>${q.promptAfter}</span>
+                `;
+            } else if (q.type === 'match') {
+                dropContainer.className = "grid grid-cols-1 gap-3 bg-blue-50/80 p-4 sm:p-5 rounded-2xl border-2 border-blue-200";
+                q.slots.forEach(slot => {
+                    const row = document.createElement('div');
+                    row.className = "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 bg-white p-3 rounded-xl border border-blue-100 shadow-xs";
+                    row.innerHTML = `
+                        <div class="font-extrabold text-slate-800 text-sm sm:text-base flex items-center gap-2 sm:w-1/2">
+                            <span class="bg-amber-100 text-amber-900 px-3 py-1.5 rounded-lg border border-amber-300 w-full">${slot.label}</span>
+                        </div>
+                        <div class="hidden sm:block text-slate-400 font-bold">➡️</div>
+                        <div id="drop-slot-${slot.id}" data-slot-id="${slot.id}" onclick="handleSlotTap('${slot.id}')"
+                             class="drop-zone sm:w-1/2 min-h-[48px] px-3 py-2 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 text-xs sm:text-sm font-extrabold cursor-pointer text-center">
+                            [ Taruh Pasangan di Sini ]
+                        </div>
+                    `;
+                    dropContainer.appendChild(row);
+                });
+            }
+            interactiveArea.appendChild(dropContainer);
+
+            // B. Render Bank Kartu Pilihan (Acak Urutan)
+            const bankWrapper = document.createElement('div');
+            bankWrapper.className = "space-y-2";
+            bankWrapper.innerHTML = `<p class="text-xs font-extrabold text-slate-500 uppercase tracking-wider">🃏 Pilihan Kartu Jawaban (Seret atau Ketuk):</p>`;
+
+            const cardsGrid = document.createElement('div');
+            cardsGrid.id = "cards-bank";
+            cardsGrid.className = "grid grid-cols-1 sm:grid-cols-2 gap-3";
+
+            const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+            shuffledOptions.forEach((optText, idx) => {
+                const card = document.createElement('div');
+                card.id = `drag-card-${idx}`;
+                card.draggable = true;
+                card.dataset.value = optText;
+                card.className = "draggable-card bg-amber-300 hover:bg-amber-200 text-amber-950 font-extrabold p-3.5 rounded-2xl border-b-4 border-r-2 border-amber-600 shadow-sm text-sm sm:text-base flex items-center justify-between gap-2";
+                card.innerHTML = `
+                    <span>${optText}</span>
+                    <span class="text-amber-700 text-xs bg-white/60 px-2 py-0.5 rounded-lg">⠿</span>
+                `;
+
+                // Event Mouse Drag
+                card.addEventListener('dragstart', handleDragStart);
+                card.addEventListener('dragend', handleDragEnd);
+
+                // Event Touch Drag (HP/Tablet)
+                card.addEventListener('touchstart', handleTouchStart, { passive: false });
+                card.addEventListener('touchmove', handleTouchMove, { passive: false });
+                card.addEventListener('touchend', handleTouchEnd);
+
+                // Event Klik/Tap Alternatif (Aksesibilitas Mudah)
+                card.addEventListener('click', () => handleCardTap(card));
+
+                cardsGrid.appendChild(card);
+            });
+
+            bankWrapper.appendChild(cardsGrid);
+            interactiveArea.appendChild(bankWrapper);
+
+            // Pasang Event Drop pada semua Drop Zone
+            setupDropZones();
+        }
+
+        function setupDropZones() {
+            const zones = document.querySelectorAll('.drop-zone');
+            zones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('drag-over');
+                });
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-over');
+                });
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    const value = e.dataTransfer.getData('text/plain');
+                    const slotId = zone.dataset.slotId;
+                    if (value) {
+                        placeOptionInSlot(slotId, value);
+                    }
+                });
+            });
+        }
+
+        /* Handler Drag Desktop */
+        function handleDragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.dataset.value);
+            e.target.classList.add('dragging');
+        }
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        /* Handler Touch Drag Mobile/Tablet */
+        let activeTouchCard = null;
+        let touchGhost = null;
+
+        function handleTouchStart(e) {
+            if (e.target.closest('.draggable-card').classList.contains('hidden')) return;
+            activeTouchCard = e.target.closest('.draggable-card');
+            const touch = e.touches[0];
+
+            // Buat elemen visual melayang
+            touchGhost = activeTouchCard.cloneNode(true);
+            touchGhost.id = 'touch-ghost';
+            touchGhost.style.width = `${activeTouchCard.offsetWidth}px`;
+            touchGhost.style.left = `${touch.clientX}px`;
+            touchGhost.style.top = `${touch.clientY}px`;
+            document.body.appendChild(touchGhost);
+
+            activeTouchCard.classList.add('dragging');
+        }
+
+        function handleTouchMove(e) {
+            if (!touchGhost) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchGhost.style.left = `${touch.clientX}px`;
+            touchGhost.style.top = `${touch.clientY}px`;
+
+            // Sorot drop zone di bawah jari
+            document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
+            const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+            const dropZone = elemBelow ? elemBelow.closest('.drop-zone') : null;
+            if (dropZone) {
+                dropZone.classList.add('drag-over');
+            }
+        }
+
+        function handleTouchEnd(e) {
+            if (!touchGhost || !activeTouchCard) return;
+            const touch = e.changedTouches[0];
+            const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+            const dropZone = elemBelow ? elemBelow.closest('.drop-zone') : null;
+
+            document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drag-over'));
+            activeTouchCard.classList.remove('dragging');
+
+            if (dropZone) {
+                placeOptionInSlot(dropZone.dataset.slotId, activeTouchCard.dataset.value);
+            }
+
+            touchGhost.remove();
+            touchGhost = null;
+            activeTouchCard = null;
+        }
+
+        /* Handler Klik/Tap (Memilih Kartu lalu Mengetuk Kotak Tujuan) */
+        function handleCardTap(card) {
+            document.querySelectorAll('.draggable-card').forEach(c => c.classList.remove('selected-tap'));
+            if (gameState.selectedTapOption === card.dataset.value) {
+                gameState.selectedTapOption = null;
+            } else {
+                gameState.selectedTapOption = card.dataset.value;
+                card.classList.add('selected-tap');
+                AudioEngine.sfxDrop();
+            }
+        }
+
+        function handleSlotTap(slotId) {
+            // Jika ada kartu yang sedang dipilih via tap, masukkan ke slot
+            if (gameState.selectedTapOption) {
+                placeOptionInSlot(slotId, gameState.selectedTapOption);
+                gameState.selectedTapOption = null;
+                document.querySelectorAll('.draggable-card').forEach(c => c.classList.remove('selected-tap'));
+            } else if (gameState.userPlacements[slotId]) {
+                // Jika slot sudah terisi dan diklik, kembalikan kartunya ke bank
+                removeOptionFromSlot(slotId);
+            }
+        }
+
+        /* Logika Penempatan Kartu ke Zona Drop */
+        function placeOptionInSlot(slotId, value) {
+            AudioEngine.sfxDrop();
+
+            // Jika slot tersebut sudah berisi kartu lain, kembalikan kartu lama ke bank
+            if (gameState.userPlacements[slotId]) {
+                showCardInBank(gameState.userPlacements[slotId]);
+            }
+
+            // Jika kartu ini sebelumnya ada di slot lain, kosongkan slot lama
+            for (const [existingSlot, existingVal] of Object.entries(gameState.userPlacements)) {
+                if (existingVal === value) {
+                    delete gameState.userPlacements[existingSlot];
+                    resetSlotVisual(existingSlot);
+                }
+            }
+
+            // Simpan penempatan baru
+            gameState.userPlacements[slotId] = value;
+            hideCardInBank(value);
+
+            // Perbarui tampilan zona drop
+            const zone = document.getElementById(`drop-slot-${slotId}`);
+            zone.classList.add('filled');
+            zone.classList.remove('text-slate-400');
+            zone.classList.add('text-emerald-900');
+            zone.innerHTML = `
+                <div class="flex items-center justify-between w-full gap-2">
+                    <span class="mx-auto">${value}</span>
+                    <span class="text-xs bg-red-100 text-red-600 px-1.5 py-0.5 rounded-md font-bold" title="Klik untuk lepas">✕</span>
+                </div>
+            `;
+
+            validateCheckButton();
+        }
+
+        function removeOptionFromSlot(slotId) {
+            const val = gameState.userPlacements[slotId];
+            if (!val) return;
+            delete gameState.userPlacements[slotId];
+            showCardInBank(val);
+            resetSlotVisual(slotId);
+            validateCheckButton();
+            AudioEngine.sfxDrop();
+        }
+
+        function resetSlotVisual(slotId) {
+            const q = questionsData[gameState.currentIndex];
+            const zone = document.getElementById(`drop-slot-${slotId}`);
+            zone.classList.remove('filled', 'text-emerald-900');
+            zone.classList.add('text-slate-400');
+            zone.textContent = q.type === 'single' ? '[ Taruh Jawaban di Sini ]' : '[ Taruh Pasangan di Sini ]';
+        }
+
+        function hideCardInBank(value) {
+            document.querySelectorAll('.draggable-card').forEach(card => {
+                if (card.dataset.value === value) {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        function showCardInBank(value) {
+            document.querySelectorAll('.draggable-card').forEach(card => {
+                if (card.dataset.value === value) {
+                    card.classList.remove('hidden', 'selected-tap');
+                }
+            });
+        }
+
+        function resetCurrentQuestion() {
+            renderQuestion();
+            AudioEngine.sfxDrop();
+        }
+
+        function validateCheckButton() {
+            const q = questionsData[gameState.currentIndex];
+            const requiredCount = q.type === 'single' ? 1 : q.slots.length;
+            const filledCount = Object.keys(gameState.userPlacements).length;
+            document.getElementById('btn-check-answer').disabled = (filledCount < requiredCount);
+        }
+
+        /* -----------------------------------------------------------
+           6. PEMERIKSAAN JAWABAN & UMPAN BALIK EDUKATIF
+           ----------------------------------------------------------- */
+        function checkAnswer() {
+            if (gameState.isQuestionAnswered) return;
+            gameState.isQuestionAnswered = true;
+
+            const q = questionsData[gameState.currentIndex];
+            let isCorrect = false;
+
+            if (q.type === 'single') {
+                isCorrect = (gameState.userPlacements['main'] === q.answer);
+            } else if (q.type === 'match') {
+                isCorrect = q.slots.every(slot => gameState.userPlacements[slot.id] === slot.answer);
+            }
+
+            const fbModal = document.getElementById('feedback-modal');
+            const fbHeader = document.getElementById('fb-header');
+            const fbIcon = document.getElementById('fb-icon');
+            const fbTitle = document.getElementById('fb-title');
+            const fbExplanation = document.getElementById('fb-explanation');
+
+            if (isCorrect) {
+                gameState.score += 10;
+                gameState.correctCount++;
+                AudioEngine.sfxCorrect();
+
+                fbHeader.className = "p-5 text-center text-white bg-emerald-500";
+                fbIcon.textContent = "🎉";
+                fbTitle.textContent = "Hebat! Jawabanmu Benar!";
+            } else {
+                gameState.lives--;
+                AudioEngine.sfxWrong();
+                document.getElementById('question-container').classList.add('animate-shake');
+
+                fbHeader.className = "p-5 text-center text-white bg-rose-600";
+                fbIcon.textContent = "💡";
+                fbTitle.textContent = "Kurang Tepat, Ayo Pelajari!";
+            }
+
+            updateHud();
+            fbExplanation.textContent = q.explanation;
+
+            fbModal.classList.remove('hidden');
+            fbModal.classList.add('flex');
+        }
+
+        function nextQuestion() {
+            const fbModal = document.getElementById('feedback-modal');
+            fbModal.classList.add('hidden');
+            fbModal.classList.remove('flex');
+
+            // Cek apakah nyawa habis
+            if (gameState.lives <= 0) {
+                endGame("Kesempatan Habis!");
+                return;
+            }
+
+            // Lanjut ke soal berikutnya atau selesai
+            gameState.currentIndex++;
+            if (gameState.currentIndex < questionsData.length) {
+                updateHud();
+                renderQuestion();
+            } else {
+                endGame("Petualangan Selesai!");
+            }
+        }
+
+        /* -----------------------------------------------------------
+           7. HALAMAN HASIL AKHIR, EVALUASI & PAPAN PERINGKAT LOKAL
+           ----------------------------------------------------------- */
+        function endGame(reasonTitle) {
+            clearInterval(gameState.timerInterval);
+            AudioEngine.sfxWin();
+
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+
+            // Hitung Sisa Waktu
+            const mins = Math.floor(gameState.timeRemaining / 60);
+            const secs = gameState.timeRemaining % 60;
+            const timeFormatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            // Tentukan Predikat & Evaluasi
+            let grade = "";
+            let evalText = "";
+            let emoji = "";
+            let headerClass = "";
+
+            if (gameState.score >= 90) {
+                grade = "Sangat Baik (A)";
+                emoji = "🏆";
+                headerClass = "bg-gradient-to-r from-emerald-500 to-teal-600 p-6 sm:p-8 text-center text-white";
+                evalText = `Luar biasa, ${gameState.playerName}! Kamu sangat menguasai sejarah perumusan dan lahirnya Pancasila serta mampu meneladani nilai-nilai luhur para pendiri bangsa.`;
+            } else if (gameState.score >= 70) {
+                grade = "Baik (B)";
+                emoji = "🌟";
+                headerClass = "bg-gradient-to-r from-blue-500 to-indigo-600 p-6 sm:p-8 text-center text-white";
+                evalText = `Bagus sekali, ${gameState.playerName}! Kamu sudah memahami sebagian besar materi Sejarah Lahirnya Pancasila. Terus berlatih agar semakin sempurna!`;
+            } else {
+                grade = "Perlu Bimbingan (C)";
+                emoji = "📚";
+                headerClass = "bg-gradient-to-r from-amber-500 to-orange-600 p-6 sm:p-8 text-center text-white";
+                evalText = `Tetap semangat, ${gameState.playerName}! Coba baca kembali Ringkasan Materi di halaman awal untuk mengingat tokoh dan tanggal penting sejarah lahirnya Pancasila, lalu mainkan lagi ya!`;
+            }
+
+            document.getElementById('result-header').className = headerClass;
+            document.getElementById('result-emoji').textContent = emoji;
+            document.getElementById('result-title').textContent = reasonTitle;
+            document.getElementById('res-score').textContent = gameState.score;
+            document.getElementById('res-correct').textContent = `${gameState.correctCount}/10`;
+            document.getElementById('res-time').textContent = timeFormatted;
+            document.getElementById('res-grade').textContent = grade;
+            document.getElementById('res-evaluation').textContent = evalText;
+
+            // Simpan ke Leaderboard Lokal
+            saveScoreToLeaderboard(gameState.playerName, gameState.score, timeFormatted);
+        }
+
+        function resetToStart() {
+            clearInterval(gameState.timerInterval);
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-start').classList.remove('hidden');
+            AudioEngine.sfxDrop();
+        }
+
+        /* Manajemen Papan Peringkat (LocalStorage) */
+        const STORAGE_KEY = 'pancasila_grade5_leaderboard_v1';
+
+        function saveScoreToLeaderboard(name, score, timeLeft) {
+            let board = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            board.push({
+                name: name,
+                score: score,
+                time: timeLeft,
+                date: new Date().toLocaleDateString('id-ID')
+            });
+            // Urutkan berdasarkan skor tertinggi
+            board.sort((a, b) => b.score - a.score);
+            board = board.slice(0, 10); // Simpan 10 terbaik
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(board));
+        }
+
+        function openLeaderboardModal() {
+            const listEl = document.getElementById('leaderboard-list');
+            const board = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+            if (board.length === 0) {
+                listEl.innerHTML = `<p class="text-center text-slate-500 py-6 font-bold text-sm">Belum ada catatan skor. Jadilah juara pertama!</p>`;
+            } else {
+                listEl.innerHTML = board.map((item, idx) => {
+                    const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx + 1}`;
+                    return `
+                        <div class="flex items-center justify-between bg-amber-50/70 p-3 rounded-xl border border-amber-200">
+                            <div class="flex items-center gap-3">
+                                <span class="font-extrabold text-base w-7 text-center">${medal}</span>
+                                <div>
+                                    <p class="font-extrabold text-slate-800 text-sm">${item.name}</p>
+                                    <p class="text-xs text-slate-500 font-semibold">${item.date} • Sisa Waktu ${item.time}</p>
+                                </div>
+                            </div>
+                            <span class="bg-emerald-500 text-white font-extrabold px-3 py-1 rounded-lg text-sm">
+                                ${item.score}
+                            </span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            const modal = document.getElementById('leaderboard-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLeaderboardModal() {
+            const modal = document.getElementById('leaderboard-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function clearLeaderboard() {
+            localStorage.removeItem(STORAGE_KEY);
+            openLeaderboardModal();
+        }
+
+        /* Manajemen Modal Ringkasan Materi */
+        function openMaterialModal() {
+            const modal = document.getElementById('material-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            AudioEngine.sfxDrop();
+        }
+
+        function closeMaterialModal() {
+            const modal = document.getElementById('material-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
