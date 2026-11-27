@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generator Bahan Ajar & LKPD SD - Kurikulum Merdeka</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Marked.js untuk merender Markdown menjadi HTML yang rapi -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- html2pdf.js untuk mengunduh PDF secara langsung tanpa terblokir iframe -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #faf7ff;
+    }
+    h1, h2, h3, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Styling khusus untuk hasil dokumen agar terlihat seperti buku/modul ajar siap cetak dengan tema Ungu Muda & Oranye Muda */
+    .modul-content h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #6b21a8;
+      border-bottom: 3px solid #fb923c;
+      padding-bottom: 0.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modul-content h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #581c87;
+      background: linear-gradient(90deg, #f3e8ff 0%, #ffedd5 100%);
+      border-left: 5px solid #9333ea;
+      padding: 0.55rem 0.9rem;
+      border-radius: 0 0.65rem 0.65rem 0;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .modul-content h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #c2410c;
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .modul-content p {
+      margin-bottom: 0.85rem;
+      line-height: 1.7;
+      color: #334155;
+    }
+    .modul-content ul, .modul-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: #334155;
+    }
+    .modul-content ul {
+      list-style-type: disc;
+    }
+    .modul-content ol {
+      list-style-type: decimal;
+    }
+    .modul-content li {
+      margin-bottom: 0.35rem;
+      line-height: 1.6;
+    }
+    .modul-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 0.925rem;
+      border-radius: 0.65rem;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(147, 51, 234, 0.12);
+    }
+    .modul-content th {
+      background: linear-gradient(90deg, #9333ea 0%, #f97316 100%);
+      color: white;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.75rem 1rem;
+    }
+    .modul-content td {
+      border: 1px solid #e9d5ff;
+      padding: 0.65rem 1rem;
+      color: #1e293b;
+      vertical-align: top;
+    }
+    .modul-content tr:nth-child(even) td {
+      background-color: #faf5ff;
+    }
+    .modul-content blockquote {
+      background-color: #fff7ed;
+      border-left: 4px solid #f97316;
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 0.65rem 0.65rem 0;
+      color: #7c2d12;
+      font-style: normal;
+    }
+    .modul-content hr {
+      border: 0;
+      border-top: 2px dashed #d8b4fe;
+      margin: 2rem 0;
+    }
+
+    /* Mencegah elemen terpotong melintang saat ekspor PDF */
+    .modul-content p,
+    .modul-content li,
+    .modul-content tr,
+    .modul-content blockquote,
+    .modul-content h1,
+    .modul-content h2,
+    .modul-content h3 {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .modul-content h1,
+    .modul-content h2,
+    .modul-content h3 {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    /* Pengaturan khusus saat dicetak / Export PDF */
+    @media print {
+      body {
+        background-color: white !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      #output-container {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .tab-panel {
+        display: block !important;
+        page-break-before: always;
+      }
+      .tab-panel:first-child {
+        page-break-before: auto;
+      }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- Header / Navbar (Ungu Muda ke Oranye Muda) -->
+  <header class="bg-gradient-to-r from-purple-500 via-purple-400 to-orange-400 text-white shadow-md no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="bg-white/25 p-2.5 rounded-xl backdrop-blur-sm border border-white/30">
+          <i data-lucide="book-open-check" class="w-7 h-7 text-amber-100"></i>
+        </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight drop-shadow-sm">EduBahanAjar SD Generator</h1>
+          <p class="text-xs sm:text-sm text-purple-50 font-medium">Penyusun Bahan Ajar Lengkap, LKPD & Asesmen Kurikulum Merdeka</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 text-xs font-semibold bg-white/20 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/30">
+        <span class="w-2 h-2 rounded-full bg-orange-200 animate-pulse"></span>
+        <span>Siap Cetak & PDF</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+    
+    <!-- Panel Kiri: Form Konfigurasi (5 kolom di layar besar) -->
+    <section class="lg:col-span-5 no-print">
+      <div class="bg-white rounded-2xl shadow-sm border border-purple-200/80 p-5 sm:p-6 sticky top-6">
+        <div class="flex items-center gap-2 pb-4 mb-5 border-b border-purple-100">
+          <div class="p-1.5 rounded-lg bg-purple-100 text-purple-600">
+            <i data-lucide="sliders-horizontal" class="w-5 h-5"></i>
+          </div>
+          <h2 class="text-lg font-bold text-purple-950">Identitas & Pengaturan Bahan Ajar</h2>
+        </div>
+
+        <form id="generator-form" class="space-y-4">
+          <!-- Baris 1: Kelas & Fase Otomatis -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="kelas" class="block text-sm font-semibold text-slate-700 mb-1">Kelas (SD/MI) <span class="text-orange-500">*</span></label>
+              <select id="kelas" required class="w-full rounded-xl border border-purple-200 bg-purple-50/40 px-3.5 py-2.5 text-sm font-medium focus:border-purple-400 focus:bg-white focus:ring-2 focus:ring-purple-200 outline-none transition">
+                <option value="1">Kelas 1</option>
+                <option value="2">Kelas 2</option>
+                <option value="3">Kelas 3</option>
+                <option value="4" selected>Kelas 4</option>
+                <option value="5">Kelas 5</option>
+                <option value="6">Kelas 6</option>
+              </select>
+            </div>
+            <div>
+              <label for="fase" class="block text-sm font-semibold text-slate-700 mb-1">Fase Kurikulum</label>
+              <input type="text" id="fase" readonly value="Fase B (Kelas 3–4)" class="w-full rounded-xl border border-orange-200 bg-orange-50/60 px-3.5 py-2.5 text-sm font-semibold text-orange-800 cursor-not-allowed" />
+            </div>
+          </div>
+
+          <!-- Baris 2: Mata Pelajaran (Dropdown Lengkap + Koding & Opsi Manual) -->
+          <div>
+            <label for="mapel-select" class="block text-sm font-semibold text-slate-700 mb-1">Mata Pelajaran <span class="text-orange-500">*</span></label>
+            <select id="mapel-select" required class="w-full rounded-xl border border-purple-200 bg-purple-50/40 px-3.5 py-2.5 text-sm font-medium focus:border-purple-400 focus:bg-white focus:ring-2 focus:ring-purple-200 outline-none transition">
+              <option value="" disabled selected>-- Pilih Mata Pelajaran SD --</option>
+              <option value="Pendidikan Pancasila">Pendidikan Pancasila</option>
+              <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+              <option value="Matematika">Matematika</option>
+              <option value="Ilmu Pengetahuan Alam dan Sosial (IPAS)">Ilmu Pengetahuan Alam dan Sosial (IPAS)</option>
+              <option value="Koding dan Kecerdasan Artifisial (KKA)">Koding dan Kecerdasan Artifisial (KKA)</option>
+              <option value="Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK)">Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK)</option>
+              <option value="Seni Rupa">Seni Rupa</option>
+              <option value="Seni Musik">Seni Musik</option>
+              <option value="Seni Tari">Seni Tari</option>
+              <option value="Seni Teater">Seni Teater</option>
+              <option value="Bahasa Inggris">Bahasa Inggris</option>
+              <option value="Pendidikan Agama Islam dan Budi Pekerti">Pendidikan Agama Islam dan Budi Pekerti</option>
+              <option value="Pendidikan Agama Kristen dan Budi Pekerti">Pendidikan Agama Kristen dan Budi Pekerti</option>
+              <option value="Pendidikan Agama Katolik dan Budi Pekerti">Pendidikan Agama Katolik dan Budi Pekerti</option>
+              <option value="Pendidikan Agama Hindu dan Budi Pekerti">Pendidikan Agama Hindu dan Budi Pekerti</option>
+              <option value="Pendidikan Agama Buddha dan Budi Pekerti">Pendidikan Agama Buddha dan Budi Pekerti</option>
+              <option value="Pendidikan Agama Khonghucu dan Budi Pekerti">Pendidikan Agama Khonghucu dan Budi Pekerti</option>
+              <option value="Muatan Lokal / Bahasa Daerah">Muatan Lokal / Bahasa Daerah</option>
+              <option value="LAINNYA">Lainnya (Ketik Nama Mapel Sendiri...)</option>
+            </select>
+            <input type="text" id="mapel-custom" placeholder="Ketik nama mata pelajaran / muatan lokal..." class="hidden mt-2 w-full rounded-xl border border-orange-300 bg-orange-50/40 px-3.5 py-2 text-sm focus:border-orange-400 focus:bg-white focus:ring-2 focus:ring-orange-100 outline-none transition" />
+          </div>
+
+          <!-- Baris 3: Materi Pokok -->
+          <div>
+            <label for="materi" class="block text-sm font-semibold text-slate-700 mb-1">Materi Pembelajaran <span class="text-orange-500">*</span></label>
+            <input type="text" id="materi" required placeholder="Contoh: Perubahan Wujud Zat, Pecahan Senilai, Kalimat Transitif" class="w-full rounded-xl border border-purple-200 bg-purple-50/40 px-3.5 py-2.5 text-sm focus:border-purple-400 focus:bg-white focus:ring-2 focus:ring-purple-200 outline-none transition" />
+          </div>
+
+          <!-- Baris 4: Alokasi Waktu & Model Pembelajaran -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="alokasi" class="block text-sm font-semibold text-slate-700 mb-1">Alokasi Waktu <span class="text-orange-500">*</span></label>
+              <input type="text" id="alokasi" required value="2 JP (2 x 35 Menit)" placeholder="Contoh: 2 x 35 Menit" class="w-full rounded-xl border border-purple-200 bg-purple-50/40 px-3.5 py-2.5 text-sm focus:border-purple-400 focus:bg-white focus:ring-2 focus:ring-purple-200 outline-none transition" />
+            </div>
+            <div>
+              <label for="model" class="block text-sm font-semibold text-slate-700 mb-1">Model Pembelajaran</label>
+              <select id="model" class="w-full rounded-xl border border-purple-200 bg-purple-50/40 px-3.5 py-2.5 text-sm focus:border-purple-400 focus:bg-white focus:ring-2 focus:ring-purple-200 outline-none transition">
+                <option value="Otomatis (Paling Sesuai Materi)" selected>Otomatis (Sesuai Materi)</option>
+                <option value="Problem Based Learning (PBL)">Problem Based Learning (PBL)</option>
+                <option value="Project Based Learning (PjBL)">Project Based Learning (PjBL)</option>
+                <option value="Discovery Learning">Discovery Learning</option>
+                <option value="Inquiry Learning">Inquiry Learning</option>
+                <option value="Cooperative Learning">Cooperative Learning</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- FITUR UTAMA: Pemilihan CP dan TP (Otomatis vs Manual) -->
+          <div class="bg-gradient-to-br from-purple-50 to-orange-50/70 border border-purple-200 rounded-xl p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-bold text-purple-950 flex items-center gap-1.5">
+                <i data-lucide="target" class="w-4 h-4 text-orange-500"></i>
+                Pengaturan CP & TP
+              </label>
+              <span id="cp-badge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-purple-200/80 text-purple-800">Mode Otomatis</span>
+            </div>
+
+            <!-- Toggle Switch / Radio Pilihan -->
+            <div class="grid grid-cols-2 gap-2 bg-purple-200/50 p-1 rounded-xl">
+              <button type="button" id="btn-mode-otomatis" onclick="setCpMode('otomatis')" class="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-bold bg-white text-purple-700 shadow-sm transition">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-orange-500"></i>
+                Otomatis (AI)
+              </button>
+              <button type="button" id="btn-mode-manual" onclick="setCpMode('manual')" class="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-900 transition">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                Isi Manual
+              </button>
+            </div>
+
+            <!-- Keterangan Mode Otomatis -->
+            <div id="info-otomatis" class="text-xs text-slate-600 bg-white/90 p-3 rounded-lg border border-purple-100 leading-relaxed">
+              Sistem akan otomatis merumuskan <strong class="text-purple-800">Capaian Pembelajaran (CP)</strong> resmi Kurikulum Merdeka terbaru dan menurunkan <strong class="text-orange-700">Tujuan Pembelajaran (TP)</strong> terukur yang selaras dengan Kelas, Mata Pelajaran, dan Materi di atas.
+            </div>
+
+            <!-- Kotak Isian Mode Manual (Tersembunyi secara default) -->
+            <div id="box-manual" class="hidden space-y-3 pt-1">
+              <div>
+                <label for="input-cp" class="block text-xs font-bold text-purple-900 mb-1">Capaian Pembelajaran (CP) <span class="text-orange-500">*</span></label>
+                <textarea id="input-cp" rows="3" placeholder="Tempel atau ketik Capaian Pembelajaran (CP) sesuai fase di sini..." class="w-full rounded-lg border border-purple-300 bg-white p-2.5 text-xs focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"></textarea>
+              </div>
+              <div>
+                <label for="input-tp" class="block text-xs font-bold text-purple-900 mb-1">Tujuan Pembelajaran (TP) <span class="text-orange-500">*</span></label>
+                <textarea id="input-tp" rows="3" placeholder="Tuliskan daftar Tujuan Pembelajaran (TP) yang ingin dicapai..." class="w-full rounded-lg border border-purple-300 bg-white p-2.5 text-xs focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Identitas Penyusun, Sekolah & Kepala Sekolah -->
+          <div class="bg-orange-50/60 border border-orange-200/80 rounded-xl p-4 space-y-3">
+            <div class="flex items-center gap-1.5 text-xs font-bold text-orange-900 border-b border-orange-200/60 pb-2">
+              <i data-lucide="school" class="w-4 h-4 text-purple-600"></i>
+              <span>Identitas Sekolah & Pengesahan</span>
+            </div>
+
+            <div>
+              <label for="nama-sekolah" class="block text-xs font-semibold text-slate-700 mb-1">Nama Sekolah (Satuan Pendidikan)</label>
+              <input type="text" id="nama-sekolah" placeholder="Contoh: SD Negeri 01 Harapan Bangsa" class="w-full rounded-xl border border-orange-200 bg-white px-3 py-2 text-xs focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="nama-guru" class="block text-xs font-semibold text-slate-700 mb-1">Nama Guru Penyusun</label>
+                <input type="text" id="nama-guru" placeholder="Contoh: Siti Aminah, S.Pd." class="w-full rounded-xl border border-orange-200 bg-white px-3 py-2 text-xs focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition" />
+              </div>
+              <div>
+                <label for="nip-guru" class="block text-xs font-semibold text-slate-700 mb-1">NIP Guru</label>
+                <input type="text" id="nip-guru" placeholder="Contoh: 19850412 201001 2 015" class="w-full rounded-xl border border-orange-200 bg-white px-3 py-2 text-xs focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="nama-kepsek" class="block text-xs font-semibold text-slate-700 mb-1">Nama Kepala Sekolah</label>
+                <input type="text" id="nama-kepsek" placeholder="Contoh: Drs. Ahmad Fauzi, M.Pd." class="w-full rounded-xl border border-orange-200 bg-white px-3 py-2 text-xs focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition" />
+              </div>
+              <div>
+                <label for="nip-kepsek" class="block text-xs font-semibold text-slate-700 mb-1">NIP Kepala Sekolah</label>
+                <input type="text" id="nip-kepsek" placeholder="Contoh: 19720817 199803 1 008" class="w-full rounded-xl border border-orange-200 bg-white px-3 py-2 text-xs focus:border-orange-400 focus:ring-2 focus:ring-orange-100 outline-none transition" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Tombol Submit -->
+          <button type="submit" id="btn-generate" class="w-full mt-2 bg-gradient-to-r from-purple-500 via-purple-600 to-orange-500 hover:from-purple-600 hover:via-purple-700 hover:to-orange-600 text-white font-bold py-3.5 px-5 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 text-sm cursor-pointer">
+            <i data-lucide="wand-2" class="w-5 h-5"></i>
+            <span>Buat Bahan Ajar & LKPD Lengkap</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Panel Kanan: Pratinjau Hasil & Ekspor (7 kolom di layar besar) -->
+    <section class="lg:col-span-7 flex flex-col">
+      
+      <!-- Message Box / Alert Custom (Pengganti alert()) -->
+      <div id="alert-box" class="hidden mb-4 p-4 rounded-xl border flex items-start gap-3 text-sm transition-all no-print">
+        <i id="alert-icon" data-lucide="info" class="w-5 h-5 shrink-0 mt-0.5"></i>
+        <div id="alert-message" class="flex-grow font-medium"></div>
+        <button onclick="hideAlert()" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- State Awal (Kosong / Welcome) -->
+      <div id="empty-state" class="bg-white rounded-2xl border border-dashed border-purple-300 p-8 sm:p-12 text-center flex-grow flex flex-col items-center justify-center">
+        <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-orange-100 text-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+          <i data-lucide="file-text" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-lg font-bold text-purple-950 mb-2">Belum Ada Bahan Ajar Dibuat</h3>
+        <p class="text-sm text-slate-500 max-w-md mb-6 leading-relaxed">
+          Lengkapi identitas sekolah, guru, kepala sekolah, serta materi di sebelah kiri. Pilih apakah <strong class="text-purple-700">CP & TP diisi otomatis oleh AI</strong> atau <strong class="text-orange-600">Anda ketik manual</strong>, lalu klik tombol buat bahan ajar.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-lg text-left">
+          <div class="p-3 bg-purple-50/80 rounded-xl border border-purple-100">
+            <span class="text-xs font-bold text-purple-700 block mb-1">Bagian 1</span>
+            <span class="text-xs text-slate-600 font-medium">Bahan Ajar Lengkap & Pengesahan</span>
+          </div>
+          <div class="p-3 bg-orange-50/80 rounded-xl border border-orange-100">
+            <span class="text-xs font-bold text-orange-600 block mb-1">Bagian 2</span>
+            <span class="text-xs text-slate-600 font-medium">LKPD Kontekstual Siap Cetak</span>
+          </div>
+          <div class="p-3 bg-purple-50/80 rounded-xl border border-purple-100">
+            <span class="text-xs font-bold text-purple-700 block mb-1">Bagian 3</span>
+            <span class="text-xs text-slate-600 font-medium">Panduan Guru, Soal & Rubrik</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- State Loading -->
+      <div id="loading-state" class="hidden bg-white rounded-2xl border border-purple-200 p-10 text-center flex-grow flex flex-col items-center justify-center">
+        <div class="relative w-16 h-16 mb-5">
+          <div class="absolute inset-0 rounded-full border-4 border-orange-100"></div>
+          <div class="absolute inset-0 rounded-full border-4 border-purple-500 border-t-orange-400 animate-spin"></div>
+          <i data-lucide="sparkles" class="w-6 h-6 text-orange-500 absolute inset-0 m-auto animate-pulse"></i>
+        </div>
+        <h3 class="text-lg font-bold text-purple-950 mb-1">Sedang Menyusun Perangkat Ajar...</h3>
+        <p id="loading-subtext" class="text-sm text-slate-500 max-w-md">
+          AI sedang merancang Bahan Ajar, LKPD kontekstual, soal asesmen, dan lembar pengesahan sesuai Kurikulum Merdeka. Mohon tunggu sekitar 15–30 detik.
+        </p>
+      </div>
+
+      <!-- State Hasil (Output Container) -->
+      <div id="result-state" class="hidden flex-col flex-grow">
+        <!-- Toolbar Aksi (Tab Navigasi + Cetak/Salin) -->
+        <div class="bg-white rounded-t-2xl border border-b-0 border-purple-200 p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3 no-print">
+          <!-- Tab Bagian 1, 2, 3 -->
+          <div class="flex flex-wrap gap-1.5 bg-purple-100/70 p-1 rounded-xl">
+            <button type="button" onclick="switchTab('bagian1')" id="tab-bagian1" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-purple-700 shadow-sm transition">
+              1. Bahan Ajar
+            </button>
+            <button type="button" onclick="switchTab('bagian2')" id="tab-bagian2" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-900 transition">
+              2. LKPD Siswa
+            </button>
+            <button type="button" onclick="switchTab('bagian3')" id="tab-bagian3" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-900 transition">
+              3. Panduan & Asesmen
+            </button>
+            <button type="button" onclick="switchTab('semua')" id="tab-semua" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-900 transition">
+              Semua Dokumen
+            </button>
+          </div>
+
+          <!-- Tombol Ekspor -->
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" onclick="copyAllText()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-purple-100 hover:bg-purple-200 text-purple-800 transition cursor-pointer" title="Salin Teks">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span>Salin</span>
+            </button>
+            <button type="button" id="btn-download-word" onclick="downloadWord()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white shadow-sm transition cursor-pointer" title="Unduh Dokumen Microsoft Word (.doc)">
+              <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+              <span>Unduh Word</span>
+            </button>
+            <button type="button" id="btn-download-pdf" onclick="downloadPDF()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white shadow-sm transition cursor-pointer" title="Unduh Dokumen PDF Langsung">
+              <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              <span>Unduh PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Area Dokumen -->
+        <div id="output-container" class="bg-white rounded-b-2xl border border-purple-200 shadow-sm p-6 sm:p-10 modul-content overflow-x-auto">
+          <div id="content-bagian1" class="tab-panel"></div>
+          <div id="content-bagian2" class="tab-panel hidden"></div>
+          <div id="content-bagian3" class="tab-panel hidden"></div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    // Inisialisasi ikon Lucide
+    lucide.createIcons();
+
+    // State global
+    let cpMode = 'otomatis'; // 'otomatis' atau 'manual'
+    let rawMarkdownFull = '';
+
+    // Mapping Kelas ke Fase Kurikulum Merdeka
+    const kelasSelect = document.getElementById('kelas');
+    const faseInput = document.getElementById('fase');
+    const mapelSelect = document.getElementById('mapel-select');
+    const mapelCustom = document.getElementById('mapel-custom');
+
+    // Tampilkan input teks jika memilih "Lainnya" pada dropdown mapel
+    mapelSelect.addEventListener('change', () => {
+      if (mapelSelect.value === 'LAINNYA') {
+        mapelCustom.classList.remove('hidden');
+        mapelCustom.setAttribute('required', 'true');
+        mapelCustom.focus();
+      } else {
+        mapelCustom.classList.add('hidden');
+        mapelCustom.removeAttribute('required');
+      }
+    });
+
+    function getSelectedMapel() {
+      if (mapelSelect.value === 'LAINNYA') {
+        return mapelCustom.value.trim();
+      }
+      return mapelSelect.value;
+    }
+
+    function updateFase() {
+      const k = parseInt(kelasSelect.value, 10);
+      if (k === 1 || k === 2) {
+        faseInput.value = 'Fase A (Kelas 1–2)';
+      } else if (k === 3 || k === 4) {
+        faseInput.value = 'Fase B (Kelas 3–4)';
+      } else {
+        faseInput.value = 'Fase C (Kelas 5–6)';
+      }
+    }
+    kelasSelect.addEventListener('change', updateFase);
+
+    // Fungsi beralih mode CP & TP (Otomatis vs Manual)
+    function setCpMode(mode) {
+      cpMode = mode;
+      const btnAuto = document.getElementById('btn-mode-otomatis');
+      const btnManual = document.getElementById('btn-mode-manual');
+      const infoAuto = document.getElementById('info-otomatis');
+      const boxManual = document.getElementById('box-manual');
+      const badge = document.getElementById('cp-badge');
+      const inputCp = document.getElementById('input-cp');
+      const inputTp = document.getElementById('input-tp');
+
+      if (mode === 'otomatis') {
+        btnAuto.className = 'flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-bold bg-white text-purple-700 shadow-sm transition';
+        btnManual.className = 'flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-900 transition';
+        infoAuto.classList.remove('hidden');
+        boxManual.classList.add('hidden');
+        badge.textContent = 'Mode Otomatis';
+        badge.className = 'text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-purple-200/80 text-purple-800';
+        inputCp.removeAttribute('required');
+        inputTp.removeAttribute('required');
+      } else {
+        btnManual.className = 'flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-bold bg-white text-purple-700 shadow-sm transition';
+        btnAuto.className = 'flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-900 transition';
+        infoAuto.classList.add('hidden');
+        boxManual.classList.remove('hidden');
+        badge.textContent = 'Mode Manual';
+        badge.className = 'text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-orange-200/80 text-orange-800';
+        inputCp.setAttribute('required', 'true');
+        inputTp.setAttribute('required', 'true');
+      }
+      lucide.createIcons();
+    }
+
+    // Fungsi beralih Tab pada hasil dokumen
+    function switchTab(tabId) {
+      const tabs = ['bagian1', 'bagian2', 'bagian3', 'semua'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        if (t === tabId) {
+          btn.className = 'tab-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-purple-700 shadow-sm transition';
+        } else {
+          btn.className = 'tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-900 transition';
+        }
+      });
+
+      const p1 = document.getElementById('content-bagian1');
+      const p2 = document.getElementById('content-bagian2');
+      const p3 = document.getElementById('content-bagian3');
+
+      if (tabId === 'semua') {
+        p1.classList.remove('hidden');
+        p2.classList.remove('hidden');
+        p3.classList.remove('hidden');
+      } else {
+        p1.classList.toggle('hidden', tabId !== 'bagian1');
+        p2.classList.toggle('hidden', tabId !== 'bagian2');
+        p3.classList.toggle('hidden', tabId !== 'bagian3');
+      }
+    }
+
+    // Fungsi Custom Alert (Pengganti alert())
+    function showAlert(message, type = 'info') {
+      const box = document.getElementById('alert-box');
+      const msgEl = document.getElementById('alert-message');
+      const iconEl = document.getElementById('alert-icon');
+
+      box.classList.remove('hidden', 'bg-red-50', 'border-red-200', 'text-red-800', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-800', 'bg-purple-50', 'border-purple-200', 'text-purple-800');
+      
+      if (type === 'error') {
+        box.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
+        iconEl.setAttribute('data-lucide', 'alert-circle');
+      } else if (type === 'success') {
+        box.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-800');
+        iconEl.setAttribute('data-lucide', 'check-circle-2');
+      } else {
+        box.classList.add('bg-purple-50', 'border-purple-200', 'text-purple-800');
+        iconEl.setAttribute('data-lucide', 'info');
+      }
+
+      msgEl.textContent = message;
+      lucide.createIcons();
+    }
+
+    function hideAlert() {
+      document.getElementById('alert-box').classList.add('hidden');
+    }
+
+    // Fungsi Salin Teks ke Clipboard menggunakan execCommand
+    function copyAllText() {
+      if (!rawMarkdownFull) return;
+      const cleanText = rawMarkdownFull.replace(/===BATAS_BAGIAN_\d===/g, '\n----------------------------------------\n');
+      const textarea = document.createElement('textarea');
+      textarea.value = cleanText;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showAlert('Seluruh teks perangkat ajar berhasil disalin ke clipboard!', 'success');
+      } catch (err) {
+        showAlert('Gagal menyalin teks. Silakan blok teks secara manual.', 'error');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // Pembersih sintaks LaTeX mentah agar tidak tampil sebagai kode $\rightarrow$ atau $\frac{...}$
+    function sanitizeLatexOutput(text) {
+      if (!text) return '';
+      return text
+        .replace(/\$\\rightarrow\$/g, '→')
+        .replace(/\\rightarrow/g, '→')
+        .replace(/\$\\leftarrow\$/g, '←')
+        .replace(/\\leftarrow/g, '←')
+        .replace(/\$\\leftrightarrow\$/g, '↔')
+        .replace(/\\leftrightarrow/g, '↔')
+        .replace(/\$\\times\$/g, '×')
+        .replace(/\\times/g, '×')
+        .replace(/\$\\div\$/g, '÷')
+        .replace(/\\div/g, '÷')
+        .replace(/\$\\pm\$/g, '±')
+        .replace(/\\pm/g, '±')
+        .replace(/\$\\leq\$/g, '≤')
+        .replace(/\\leq/g, '≤')
+        .replace(/\$\\geq\$/g, '≥')
+        .replace(/\\geq/g, '≥')
+        .replace(/\$\\neq\$/g, '≠')
+        .replace(/\\neq/g, '≠')
+        .replace(/\\frac\{\\text\{([^}]+)\}\}\{\\text\{([^}]+)\}\}/g, '($1 / $2)')
+        .replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '($1 / $2)')
+        .replace(/\\text\{([^}]+)\}/g, '$1')
+        .replace(/\$\$([^$]+)\$\$/g, '$1')
+        .replace(/\$([^$\n]+)\$/g, '$1');
+    }
+
+    // Fungsi Unduh PDF Langsung ukuran A4 tanpa terpotong
+    async function downloadPDF() {
+      if (!rawMarkdownFull) return;
+      const btnPdf = document.getElementById('btn-download-pdf');
+      const originalHtml = btnPdf.innerHTML;
+      btnPdf.disabled = true;
+      btnPdf.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i><span>Memproses PDF A4...</span>`;
+      lucide.createIcons();
+
+      try {
+        const mapelName = getSelectedMapel() || 'Mapel';
+        const materiName = document.getElementById('materi').value.trim() || 'Materi';
+        const kelasVal = document.getElementById('kelas').value;
+        const safeFilename = `Bahan_Ajar_LKPD_Kls${kelasVal}_${mapelName}_${materiName}`.replace(/[^a-zA-Z0-9_-]/g, '_').substring(0, 65) + '.pdf';
+
+        // Buat kontainer tersembunyi berukuran standar A4 (lebar isi efektif 180mm dengan margin 15mm)
+        const host = document.createElement('div');
+        host.style.position = 'fixed';
+        host.style.left = '-10000px';
+        host.style.top = '0';
+        host.style.width = '180mm';
+        host.style.backgroundColor = '#ffffff';
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'modul-content';
+        wrapper.style.width = '180mm';
+        wrapper.style.padding = '2mm';
+        wrapper.style.boxSizing = 'border-box';
+        wrapper.style.backgroundColor = '#ffffff';
+        wrapper.style.color = '#1e293b';
+        wrapper.style.fontFamily = 'Arial, Helvetica, sans-serif';
+        wrapper.style.fontSize = '11pt';
+        wrapper.style.lineHeight = '1.55';
+
+        const p1Html = document.getElementById('content-bagian1').innerHTML;
+        const p2Html = document.getElementById('content-bagian2').innerHTML;
+        const p3Html = document.getElementById('content-bagian3').innerHTML;
+
+        wrapper.innerHTML = `
+          <div>${p1Html}</div>
+          <div style="page-break-before: always; break-before: page; margin-top: 10px;">${p2Html}</div>
+          <div style="page-break-before: always; break-before: page; margin-top: 10px;">${p3Html}</div>
+        `;
+
+        host.appendChild(wrapper);
+        document.body.appendChild(host);
+
+        const opt = {
+          margin: [15, 15, 15, 15],
+          filename: safeFilename,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            letterRendering: true,
+            scrollY: 0,
+            windowWidth: 794
+          },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+          pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+
+        await html2pdf().set(opt).from(wrapper).save();
+        document.body.removeChild(host);
+        showAlert('File PDF ukuran A4 berhasil dibuat tanpa terpotong!', 'success');
+      } catch (err) {
+        showAlert('Gagal membuat file PDF. Silakan gunakan tombol Unduh Word sebagai alternatif.', 'error');
+      } finally {
+        btnPdf.disabled = false;
+        btnPdf.innerHTML = originalHtml;
+        lucide.createIcons();
+      }
+    }
+
+    // Fungsi Unduh Microsoft Word (.doc) ukuran A4 & Font Arial 12pt
+    function downloadWord() {
+      if (!rawMarkdownFull) return;
+      try {
+        const mapelName = getSelectedMapel() || 'Mapel';
+        const materiName = document.getElementById('materi').value.trim() || 'Materi';
+        const kelasVal = document.getElementById('kelas').value;
+        const safeFilename = `Bahan_Ajar_LKPD_Kls${kelasVal}_${mapelName}_${materiName}`.replace(/[^a-zA-Z0-9_-]/g, '_').substring(0, 65) + '.doc';
+
+        const p1Html = document.getElementById('content-bagian1').innerHTML;
+        const p2Html = document.getElementById('content-bagian2').innerHTML;
+        const p3Html = document.getElementById('content-bagian3').innerHTML;
+
+        const wordContent = `
+          <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+          <head>
+            <meta charset='utf-8'>
+            <title>Bahan Ajar dan LKPD SD Kurikulum Merdeka</title>
+            <style>
+              @page Section1 {
+                size: 21.0cm 29.7cm;
+                margin: 2.0cm 2.0cm 2.0cm 2.0cm;
+                mso-header-margin: 1.25cm;
+                mso-footer-margin: 1.25cm;
+                mso-paper-source: 0;
+              }
+              div.Section1 { page: Section1; }
+              body, p, li, div, span, td, th, blockquote {
+                font-family: 'Arial', sans-serif !important;
+                font-size: 12pt !important;
+                line-height: 1.5;
+                color: #1e293b;
+              }
+              h1 {
+                font-family: 'Arial', sans-serif !important;
+                font-size: 16pt !important;
+                font-weight: bold;
+                color: #6b21a8;
+                border-bottom: 2pt solid #fb923c;
+                padding-bottom: 4pt;
+                margin-top: 14pt;
+              }
+              h2 {
+                font-family: 'Arial', sans-serif !important;
+                font-size: 14pt !important;
+                font-weight: bold;
+                color: #581c87;
+                background-color: #f3e8ff;
+                padding: 5pt 8pt;
+                border-left: 4pt solid #9333ea;
+                margin-top: 12pt;
+              }
+              h3 {
+                font-family: 'Arial', sans-serif !important;
+                font-size: 12pt !important;
+                font-weight: bold;
+                color: #c2410c;
+                margin-top: 10pt;
+              }
+              table { width: 100%; border-collapse: collapse; margin: 10pt 0; }
+              th {
+                background-color: #9333ea;
+                color: #ffffff !important;
+                font-weight: bold;
+                border: 1pt solid #9333ea;
+                padding: 6pt;
+                text-align: left;
+              }
+              td {
+                border: 1pt solid #cbd5e1;
+                padding: 6pt;
+                vertical-align: top;
+              }
+              blockquote {
+                background-color: #fff7ed;
+                border-left: 3pt solid #f97316;
+                padding: 6pt 10pt;
+                margin: 8pt 0;
+                color: #7c2d12;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="Section1">
+              <div>${p1Html}</div>
+              <br clear="all" style="page-break-before:always" />
+              <div>${p2Html}</div>
+              <br clear="all" style="page-break-before:always" />
+              <div>${p3Html}</div>
+            </div>
+          </body>
+          </html>
+        `;
+
+        const blob = new Blob(['\ufeff', wordContent], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = safeFilename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        showAlert('File Microsoft Word (.doc) ukuran A4 dengan font Arial 12pt berhasil diunduh!', 'success');
+      } catch (err) {
+        showAlert('Terjadi kendala saat mengunduh file Word.', 'error');
+      }
+    }
+
+    // Pemanggilan API Gemini dengan Exponential Backoff
+    async function callGeminiWithRetry(promptText, systemInstructionText) {
+      const apiKey = ""; // Disediakan otomatis oleh lingkungan runtime
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+      const payload = {
+        contents: [{ parts: [{ text: promptText }] }],
+        systemInstruction: {
+          parts: [{ text: systemInstructionText }]
+        },
+        generationConfig: {
+          temperature: 0.5
+        }
+      };
+
+      const delays = [1000, 2000, 4000, 8000];
+      for (let attempt = 0; attempt <= delays.length; attempt++) {
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
+
+          const data = await response.json();
+          const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (!text) {
+            throw new Error("Respons AI kosong atau tidak valid.");
+          }
+          return text;
+        } catch (error) {
+          if (attempt === delays.length) {
+            throw error;
+          }
+          await new Promise(resolve => setTimeout(resolve, delays[attempt]));
+        }
+      }
+    }
+
+    // Handler Form Submit
+    document.getElementById('generator-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const kelas = document.getElementById('kelas').value;
+      const fase = document.getElementById('fase').value;
+      const mapel = getSelectedMapel();
+      const materi = document.getElementById('materi').value.trim();
+
+      if (!mapel) {
+        showAlert('Silakan pilih atau ketik Mata Pelajaran terlebih dahulu.', 'error');
+        return;
+      }
+      const alokasi = document.getElementById('alokasi').value.trim();
+      const model = document.getElementById('model').value;
+      const namaSekolah = document.getElementById('nama-sekolah').value.trim() || 'SD Negeri ..............................';
+      const namaGuru = document.getElementById('nama-guru').value.trim() || '..............................';
+      const nipGuru = document.getElementById('nip-guru').value.trim() || '..............................';
+      const namaKepsek = document.getElementById('nama-kepsek').value.trim() || '..............................';
+      const nipKepsek = document.getElementById('nip-kepsek').value.trim() || '..............................';
+
+      let instruksiCpTp = '';
+      if (cpMode === 'manual') {
+        const cpManual = document.getElementById('input-cp').value.trim();
+        const tpManual = document.getElementById('input-tp').value.trim();
+        if (!cpManual || !tpManual) {
+          showAlert('Harap isi Capaian Pembelajaran (CP) dan Tujuan Pembelajaran (TP) pada kotak isian manual.', 'error');
+          return;
+        }
+        instruksiCpTp = `
+        MODE CP & TP: INPUT MANUAL DARI GURU.
+        Gunakan secara persis dan kembangkan materi berdasarkan CP dan TP berikut:
+        - Capaian Pembelajaran (CP): "${cpManual}"
+        - Tujuan Pembelajaran (TP): "${tpManual}"
+        `;
+      } else {
+        instruksiCpTp = `
+        MODE CP & TP: OTOMATIS OLEH SISTEM.
+        Carikan dan rumuskan Capaian Pembelajaran (CP) resmi Kurikulum Merdeka yang akurat untuk jenjang SD ${fase} mata pelajaran ${mapel}, serta turunkan menjadi Tujuan Pembelajaran (TP) yang spesifik, operasional, dan terukur untuk materi "${materi}". Jangan mengarang referensi palsu; pastikan selaras dengan standar kurikulum nasional.
+        `;
+      }
+
+      // Tampilkan loading
+      document.getElementById('empty-state').classList.add('hidden');
+      document.getElementById('result-state').classList.add('hidden');
+      document.getElementById('loading-state').classList.remove('hidden');
+      const btnSubmit = document.getElementById('btn-generate');
+      const systemPrompt = `Anda adalah ahli pengembangan bahan ajar Sekolah Dasar (SD), guru profesional, pengembang kurikulum resmi Kemendikbudristek / Kemendikdasmen, ahli pedagogik, dan desainer media pembelajaran digital.
+Tugas Anda adalah menyusun **BAHAN AJAR LENGKAP DAN LKPD SD** (bukan sekadar kerangka RPP/Modul Ajar) yang berstandar resmi Kurikulum Merdeka Kemendikbud, menarik, ramah anak, sistematis, dan siap cetak.
+Gunakan bahasa Indonesia baku yang komunikatif sesuai usia anak SD, tabel terstruktur, contoh konkret kehidupan sehari-hari, serta isi yang LENGKAP dan KONKRET (bukan ringkasan).
+ATURAN FORMAT WAJIB:
+- JANGAN PERNAH menggunakan sintaks kode LaTeX seperti $\\rightarrow$, $\\frac{...}{...}$, $\\times$, atau tanda dolar $...$ untuk rumus/panah! Gunakan langsung simbol teks biasa seperti →, ×, ÷, =, atau penulisan rumus biasa seperti: Nilai Akhir = (Skor Perolehan / Skor Maksimal) × 100.
+- Pisahkan ketiga bagian utama menggunakan pemisah persis berikut agar sistem dapat membagi tab secara akurat:
+===BATAS_BAGIAN_1===
+(Isi lengkap BAGIAN 1: BAHAN AJAR PESERTA DIDIK — Sampul, Identitas & Pengesahan, CP/TP, Peta Konsep, Uraian Materi Lengkap, Aktivitas Eksplorasi, Rangkuman, Glosarium, Refleksi)
+===BATAS_BAGIAN_2===
+(Isi lengkap BAGIAN 2: LEMBAR KERJA PESERTA DIDIK / LKPD — Terpisah dan siap dicetak untuk siswa)
+===BATAS_BAGIAN_3===
+(Isi lengkap BAGIAN 3: PANDUAN GURU PENGGUNAAN BAHAN AJAR, DIFERENSIASI, & INSTRUMEN ASESMEN LENGKAP)`;
+
+      const userPrompt = `Buatkan **BAHAN AJAR LENGKAP DAN LKPD SD** berstandar Kurikulum Merdeka Kemendikbud (dengan pendekatan Pembelajaran Mendalam / Deep Learning) berdasarkan identitas berikut:
+- Satuan Pendidikan / Sekolah: ${namaSekolah}
+- Jenjang: Sekolah Dasar (SD/MI)
+- Kelas / Fase: Kelas ${kelas} / ${fase}
+- Mata Pelajaran: ${mapel}
+- Materi Pokok: ${materi}
+- Alokasi Waktu: ${alokasi}
+- Tahun Penyusunan: 2026
+- Model Pembelajaran: ${model}
+- Nama Guru Penyusun: ${namaGuru}
+- NIP Guru: ${nipGuru}
+- Nama Kepala Sekolah: ${namaKepsek}
+- NIP Kepala Sekolah: ${nipKepsek}
+
+${instruksiCpTp}
+
+Susun hasil menjadi tiga bagian utama yang lengkap, padat ilmu, dan siap digunakan di kelas:
+
+===BATAS_BAGIAN_1===
+# BAGIAN 1: BAHAN AJAR PESERTA DIDIK
+## ${materi.toUpperCase()} (${mapel} — Kelas ${kelas} SD)
+
+1. **Halaman Sampul Bahan Ajar** (Judul Bahan Ajar yang menarik bagi anak SD, Subjudul, Identitas Satuan Pendidikan: ${namaSekolah}, Kelas/Fase: Kelas ${kelas} / ${fase}, Penyusun: ${namaGuru}, serta deskripsi ilustrasi sampul edukatif).
+2. **Identitas Bahan Ajar** (Sajikan dalam tabel resmi 2 kolom: Satuan Pendidikan: ${namaSekolah}; Jenjang/Kelas/Fase: SD / Kelas ${kelas} / ${fase}; Mata Pelajaran: ${mapel}; Materi Pokok: ${materi}; Alokasi Waktu: ${alokasi}; Model & Pendekatan: ${model} & Pembelajaran Mendalam / *Deep Learning*; Penyusun: ${namaGuru} (NIP. ${nipGuru}); Kepala Sekolah: ${namaKepsek} (NIP. ${nipKepsek})).
+3. **Deskripsi Singkat & Peta Konsep Materi** (Gambaran umum isi bahan ajar serta bagan/tabel Peta Konsep hubungan antarsubmateri).
+4. **Target Capaian Pembelajaran (Kurikulum Merdeka)**:
+   - **Capaian Pembelajaran (CP)**
+   - **Tujuan Pembelajaran (TP)** (Terukur dan operasional)
+   - **Kompetensi Awal**
+   - **Profil Pelajar Pancasila / Dimensi Profil Lulusan yang Relevan**
+   - **Pemahaman Bermakna & Pertanyaan Pemantik**
+5. **Uraian Materi Pembelajaran Lengkap dan Sistematis**:
+   - Sajikan pembahasan materi secara mendalam, jelas, dan bertahap dari konsep dasar ke penerapan dengan bahasa yang ramah anak SD Kelas ${kelas} (hindari paragraf terlalu panjang).
+   - Sertakan **Contoh Konkret** yang dekat dengan kehidupan sehari-hari anak di rumah maupun di sekolah.
+   - Sertakan **Ilustrasi / Diagram / Tabel / Infografis Pendukung** (tuliskan deskripsi visual yang jelas atau tabel perbandingan/klasifikasi yang mudah dipahami).
+6. **Aktivitas Eksplorasi & Kegiatan Interaktif ("Ayo Mencoba & Mengamati!")** (Kegiatan eksplorasi singkat di sela bacaan agar siswa belajar aktif, bermakna, dan menyenangkan).
+7. **Rangkuman Materi** (Poin-poin inti materi yang mudah diingat).
+8. **Glosarium** (Daftar istilah penting pada materi beserta artinya dengan bahasa sederhana anak SD) & **Daftar Pustaka** (Referensi buku siswa/guru resmi Kemendikbud).
+9. **Refleksi Belajar Peserta Didik** (Pertanyaan refleksi diri setelah membaca bahan ajar).
+
+### LEMBAR PENGESAHAN BAHAN AJAR
+Sajikan dalam tabel 2 kolom sejajar:
+- **Kolom Kiri:** Mengetahui, Kepala ${namaSekolah}, ruang tanda tangan, **${namaKepsek}**, NIP. ${nipKepsek}
+- **Kolom Kanan:** Penyusun / Guru Kelas, ruang tanda tangan, **${namaGuru}**, NIP. ${nipGuru}
+
+===BATAS_BAGIAN_2===
+# BAGIAN 2: LEMBAR KERJA PESERTA DIDIK (LKPD)
+Sajikan terpisah dari bahan ajar sehingga langsung siap dicetak dan dikerjakan siswa:
+1. **Judul LKPD & Identitas Peserta Didik** (Kop Sekolah: ${namaSekolah}, Mata Pelajaran: ${mapel}, Kelas/Fase: Kelas ${kelas} / ${fase}, Materi: ${materi}, serta kotak isian rapi: Nama Siswa, Nomor Absen, Kelas, Hari/Tanggal, Nama Kelompok).
+2. **Tujuan Kegiatan & Petunjuk Pengerjaan** (Instruksi langkah demi langkah dengan bahasa yang jelas untuk anak SD).
+3. **Alat dan Bahan** (Jika kegiatan memerlukan alat tulis, benda sekitar, atau bahan praktik sederhana).
+4. **Stimulus Kontekstual ("Ayo Mengamati Masalah!")** (Cerita pendek, deskripsi gambar/ilustrasi, tabel data, atau permasalahan nyata di sekitar anak).
+5. **Langkah-Langkah Kegiatan & Tugas Eksplorasi** (Urutan aktivitas mengamati, mengidentifikasi, menganalisis, mencoba, atau menciptakan sesuai karakteristik materi; lengkapi dengan kotak/tabel ruang jawaban siswa yang memadai).
+6. **Kesimpulan Hasil Kegiatan** (Panduan bagi siswa untuk menuliskan kesimpulan temuannya).
+7. **Refleksi Peserta Didik** (Ekspresi perasaan dan pemahaman siswa setelah mengerjakan LKPD).
+
+===BATAS_BAGIAN_3===
+# BAGIAN 3: PANDUAN GURU, DIFERENSIASI & INSTRUMEN ASESMEN
+
+## A. Panduan Penggunaan Bahan Ajar & Langkah Pembelajaran (Deep Learning)
+1. **Persiapan Sebelum Pembelajaran** (Penyiapan bahan ajar cetak/digital, media, dan LKPD).
+2. **Langkah Pembelajaran Terstruktur** (Menggunakan model ${model} dengan prinsip *Mindful*, *Meaningful*, *Joyful*):
+   - **Kegiatan Pendahuluan** (Orientasi, apersepsi, pertanyaan pemantik, asesmen awal).
+   - **Kegiatan Inti** (Pemanfaatan Bahan Ajar dan pengerjaan LKPD secara aktif dan kolaboratif).
+   - **Kegiatan Penutup** (Penguatan konsep, rangkuman, refleksi, dan tindak lanjut).
+3. **Media, Sumber Belajar & Alternatif Sarana Terbatas** (Solusi praktis jika sekolah tidak memiliki proyektor/internet).
+4. **Strategi Pembelajaran Berdiferensiasi**:
+   - Untuk peserta didik yang membutuhkan bimbingan tambahan.
+   - Untuk peserta didik dengan kemampuan berkembang sesuai harapan.
+   - Untuk peserta didik yang membutuhkan tantangan lebih tinggi.
+5. **Program Tindak Lanjut (Remedial & Pengayaan)**.
+
+## B. Instrumen Asesmen Pembelajaran Lengkap
+1. **Asesmen Diagnostik Awal** (3–5 pertanyaan pemetaan kesiapan belajar awal siswa beserta kriteria tindak lanjutnya).
+2. **Asesmen Formatif & Rubrik Penilaian Sikap dan Keterampilan** (Tabel rubrik pengamatan diskusi, unjuk kerja LKPD, dan Profil Pelajar Pancasila dengan skala: Perlu Bimbingan, Cukup, Baik, Sangat Baik).
+3. **Asesmen Sumatif Akhir**:
+   - **I. Pilihan Ganda** (5 soal kontekstual dengan opsi A, B, C, D).
+   - **II. Isian Singkat** (5 soal).
+   - **III. Uraian / Pemecahan Masalah** (3 soal).
+4. **Kunci Jawaban Lengkap & Pedoman Penskoran** (Skor tiap nomor, total skor, dan rumus konversi nilai akhir skala 0–100).`;
+
+      try {
+        const rawResponseText = await callGeminiWithRetry(userPrompt, systemPrompt);
+        const resultText = sanitizeLatexOutput(rawResponseText);
+        rawMarkdownFull = resultText;
+
+        // Memecah hasil ke dalam 3 bagian berdasarkan delimiter
+        let part1 = '';
+        let part2 = '';
+        let part3 = '';
+
+        if (resultText.includes('===BATAS_BAGIAN_2===')) {
+          const split1 = resultText.split('===BATAS_BAGIAN_2===');
+          part1 = split1[0].replace('===BATAS_BAGIAN_1===', '').trim();
+          
+          if (split1[1].includes('===BATAS_BAGIAN_3===')) {
+            const split2 = split1[1].split('===BATAS_BAGIAN_3===');
+            part2 = split2[0].trim();
+            part3 = split2[1].trim();
+          } else {
+            part2 = split1[1].trim();
+            part3 = '_Bagian Panduan Guru & Asesmen tergabung di bagian sebelumnya._';
+          }
+        } else {
+          // Fallback jika AI tidak menyertakan pemisah persis
+          part1 = resultText;
+          part2 = '_Silakan lihat tab "Semua Dokumen" untuk melihat keseluruhan dokumen._';
+          part3 = '_Silakan lihat tab "Semua Dokumen" untuk melihat keseluruhan dokumen._';
+        }
+
+        // Render Markdown ke HTML
+        document.getElementById('content-bagian1').innerHTML = marked.parse(part1);
+        document.getElementById('content-bagian2').innerHTML = marked.parse(part2);
+        document.getElementById('content-bagian3').innerHTML = marked.parse(part3);
+
+        // Tampilkan hasil
+        document.getElementById('loading-state').classList.add('hidden');
+        document.getElementById('result-state').classList.remove('hidden');
+        document.getElementById('result-state').classList.add('flex');
+        switchTab('bagian1');
+        showAlert('Bahan Ajar Lengkap, LKPD, dan Panduan Asesmen berhasil disusun! Klik Unduh Word (.doc) atau Unduh PDF untuk menyimpan.', 'success');
+
+      } catch (error) {
+        document.getElementById('loading-state').classList.add('hidden');
+        document.getElementById('empty-state').classList.remove('hidden');
+        showAlert('Terjadi kendala saat menghubungi layanan AI. Pastikan koneksi internet stabil dan coba beberapa saat lagi.', 'error');
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
+    });
+  </script>
+</body>
+</html>
